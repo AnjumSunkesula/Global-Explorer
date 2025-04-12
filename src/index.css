@@ -1,1 +1,66 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+
+:root {
+  /* ----- Light Mode Variables ----- */
+
+  /* Layout */
+  --backgroundColor: #f4f1e7;
+  --secondaryBackgroundColor: #cbae85;
+
+  /* Typography */
+  --textColor: #4a3f35;
+  --fontFamily: 'Poppins', sans-serif;
+
+  /* Inputs */
+  --inputBackgroundColor: #fdfdfd;
+  --inputOutlineColor: #daa520;
+  --inputTextColor: #4a3f35;
+
+  /* Buttons */
+  --buttonBackgroundColor: #ffb600;
+  --buttonTextColor: #ffffff;
+  --buttonHighlightColor: #4a3f35;
+
+  /* Links */
+  --linkTextColor: #4a3f35;
+  --linkHoverColor: #daa520;
+
+  /* Info Text */
+  --infoTextColor: #72606091;
+
+  /* Theme Toggle */
+  --themeToggleButtonColor: #16191c;
+
+  /* Alerts */
+  --successGreen: #45d803;
+  --warningRed: #ff0000;
+
+  /* Global Styles */
+  font-size: 16px;
+  font-family: var(--fontFamily);
+}
+
+.dark-mode {
+  /* ----- Dark Mode Overrides ----- */
+  --backgroundColor: #16191c;
+  --secondaryBackgroundColor: #383f47;
+
+  --textColor: #f4f1e7;
+
+  --inputBackgroundColor: #000000;
+  --inputOutlineColor: #daa520;
+  --inputTextColor: #f4f1e7;
+
+  --buttonBackgroundColor: none;
+  --buttonTextColor: #daa520;
+  --buttonHighlightColor: #daa520;
+
+  --linkTextColor: #f4f1e7;
+  --linkHoverColor: #ffb600;
+
+  --infoTextColor: #989898bf;
+
+  --themeToggleButtonColor: #ededed;
+
+  --successGreen: #4fff00;
+}
