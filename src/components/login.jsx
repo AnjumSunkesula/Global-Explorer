@@ -63,8 +63,24 @@ function Login({ darkMode }) {
 
     setFormErrors(errors);
     if (Object.keys(errors).length === 0) {
-      alert("Registration successful!");
+    // check if user already exists
+    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+    const userExists = existingUsers.some(
+      (user) => user.email === formData.email
+    );
+
+    if (userExists) {
+      alert("An account with this email already exists. Please login.");
+      return;
     }
+
+    // save new user
+    const updatedUsers = [...existingUsers, formData];
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
+
+    alert("Registration successful!");
+    setIsRegister(false); // switch to login view after registration
+  }
   };
 
   const handleLoginSubmit = (e) => {
@@ -76,10 +92,31 @@ function Login({ darkMode }) {
 
     setFormErrors(errors);
     if (Object.keys(errors).length === 0) {
-      alert("Login successful!");
-      localStorage.setItem('isAuthenticated', 'true');
-    navigate('/home');
+    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+    const matchedUser = existingUsers.find(
+      (user) =>
+        user.email === formData.email && user.password === formData.password
+    );
+
+    if (!matchedUser) {
+      const userExists = existingUsers.some(
+        (user) => user.email === formData.email
+      );
+
+      if (userExists) {
+        alert("Incorrect password. Please try again.");
+      } else {
+        alert("No account found with this email. Please register first.");
+        setIsRegister(true);
+      }
+      return;
     }
+
+    alert("Login successful!");
+    localStorage.setItem("isAuthenticated", "true");
+    navigate("/home");
+  }
   };
 
 
