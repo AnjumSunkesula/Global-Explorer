@@ -18,8 +18,9 @@ function App() {
 
   return (
     <>
-       <button onClick={toggleTheme} className="theme-toggle-button">
-        {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+      <button onClick={toggleTheme} className="theme-toggle-button">
+        {darkMode ? '☀️' : '🌙'}&nbsp;&nbsp;{darkMode ? 'Light Mode' : 'Dark Mode'}
+
       </button>
       <Router>
         <Routes>
