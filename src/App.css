@@ -1,42 +1,106 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.theme-toggle-button {
+  background-color: var(--buttonBackgroundColor);
+  color: var(--buttonTextColor);
+  border: none;
+  padding: 10px 20px;
+  margin: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: fixed;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.dark-mode .theme-toggle-button{
+  border: 1px solid var(--buttonHighlightColor);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.theme-toggle-button:hover {
+  background-color: var(--buttonHighlightColor);
+  color: white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+
+
+body, .app {
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
+  font-family: var(--fontFamily);
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-.card {
-  padding: 2em;
+.title{
+  position: relative;
+  right: 30px;
+  top: 5px;
 }
 
-.read-the-docs {
-  color: #888;
+.btn-custom {
+  background-color: var(--buttonBackgroundColor);
+  color: var(--buttonTextColor);
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+  padding: 10px 15px;
+  text-decoration: none;
+  
+  /* display: inline-block; */
+}
+.btn-custom:hover{
+  cursor: pointer;
+  transform: translateY(-3px);
+}
+
+.dark-mode .btn-custom{
+  border: 1px solid var(--buttonHighlightColor);
+  
+}
+
+html {
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
+}
+
+
+.login-wrapper {
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.login-card {
+  background-color: var(--secondaryBackgroundColor);
+  color: var(--textColor);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-card input,
+.login-card select,
+.login-card textarea {
+  background-color: var(--inputBackgroundColor);
+  color: var(--inputTextColor);
+  border: 1px solid var(--inputOutlineColor);
+}
+
+.login-card input::placeholder {
+  color: var(--infoTextColor);
+}
+
+.dark-mode .login-card {
+  background-color: var(--secondaryBackgroundColor);
+  /* Already set in dark-mode variables */
+  color: var(--textColor);
+  border: 1px solid var(--buttonHighlightColor);
+}
+
+.input-group input:focus+label,
+.input-group input:not(:placeholder-shown)+label,
+.input-group input.focused+label,
+.input-group label.focused,
+.input-group .react-datepicker input.date-picker-not-empty+label {
+  top: 0;
+  font-size: 12px;
+  color: hsl(217, 90%, 43%);
+  background: #fff;
 }
