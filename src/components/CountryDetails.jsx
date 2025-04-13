@@ -4,9 +4,9 @@ import { useParams } from 'react-router-dom';
 function CountryDetails() {
   const { code } = useParams();
   const [country, setCountry] = useState(null);
-const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
+  const [isSaved, setIsSaved] = useState(false);
 
-  // Fetch country details based on the country code
   useEffect(() => {
     const fetchCountryDetails = async () => {
       try {
@@ -15,22 +15,36 @@ const [error, setError] = useState(null);
           throw new Error("Country not found");
         }
         const data = await response.json();
-        setCountry(data[0]); // Set the country data to state
+        setCountry(data[0]);
+        checkIfSaved(data[0]);
       } catch (error) {
-        setError(error.message); // Set error message if fetch fails
+        setError(error.message);
       }
     };
 
-    fetchCountryDetails(); // Call the function when the component mounts or code changes
-  }, [code]); // Run again if the `code` changes (i.e., if the user navigates to a different country)
+    fetchCountryDetails();
+  }, [code]);
 
-  if (error) {
-    return <div>Error: {error}</div>; // Display error message if fetching fails
-  }
+  const checkIfSaved = (country) => {
+    const saved = JSON.parse(localStorage.getItem("savedCountries")) || [];
+    const alreadySaved = saved.some((item) => item.cca3 === country.cca3);
+    setIsSaved(alreadySaved);
+  };
 
-  if (!country) {
-    return <div>Loading...</div>; // Show loading while fetching data
-  }
+  const handleSaveCountry = () => {
+    const saved = JSON.parse(localStorage.getItem("savedCountries")) || [];
+    if (!isSaved) {
+      saved.push(country);
+      localStorage.setItem("savedCountries", JSON.stringify(saved));
+      setIsSaved(true);
+      alert(`${country.name.common} saved!`);
+    } else {
+      alert(`${country.name.common} is already saved.`);
+    }
+  };
+
+  if (error) return <div>Error: {error}</div>;
+  if (!country) return <div>Loading...</div>;
 
   return (
     <div>
@@ -38,7 +52,11 @@ const [error, setError] = useState(null);
       <p>Capital: {country.capital}</p>
       <p>Population: {country.population}</p>
       <p>Languages: {Object.values(country.languages || {}).join(', ')}</p>
-      <img src={country.flags[1]} alt="flag" />
+      <img src={country.flags?.png || country.flags?.svg} alt={`${country.name.common} flag`} width="150" />
+      
+      <button onClick={handleSaveCountry} disabled={isSaved} className="save-button">
+        {isSaved ? 'Saved ✅' : 'Save'}
+      </button>
     </div>
   );
 }
