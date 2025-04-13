@@ -5,6 +5,12 @@ function SavedCountries() {
     JSON.parse(localStorage.getItem('savedCountries')) || []
   );
 
+  useEffect(() => {
+  const saved = JSON.parse(localStorage.getItem("savedCountries")) || [];
+  setSavedCountries(saved);
+}, []);
+
+
   const removeCountry = (countryCode) => {
     const updatedCountries = savedCountries.filter(
       (country) => country.cca3 !== countryCode
