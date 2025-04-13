@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login({ darkMode }) {
+
+  const navigate = useNavigate();
+
   const [isRegister, setIsRegister] = useState(true);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -73,8 +77,12 @@ function Login({ darkMode }) {
     setFormErrors(errors);
     if (Object.keys(errors).length === 0) {
       alert("Login successful!");
+      localStorage.setItem('isAuthenticated', 'true');
+    navigate('/home');
     }
   };
+
+
 
   return (
     <div className="min-vh-100 d-flex align-items-center justify-content-center login-wrapper">
