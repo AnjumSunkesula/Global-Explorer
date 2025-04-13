@@ -7,6 +7,7 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  position: fixed;
 }
 
 .dark-mode .theme-toggle-button{
@@ -20,12 +21,17 @@
 
 
 
-body,
-.app {
+body, .app {
   background-color: var(--backgroundColor);
   color: var(--textColor);
   font-family: var(--fontFamily);
   transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.title{
+  position: relative;
+  right: 30px;
+  top: 5px;
 }
 
 .btn-custom {
@@ -51,4 +57,50 @@ body,
 html {
   background-color: var(--backgroundColor);
   color: var(--textColor);
+}
+
+
+.login-wrapper {
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.login-card {
+  background-color: var(--secondaryBackgroundColor);
+  color: var(--textColor);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-card input,
+.login-card select,
+.login-card textarea {
+  background-color: var(--inputBackgroundColor);
+  color: var(--inputTextColor);
+  border: 1px solid var(--inputOutlineColor);
+}
+
+.login-card input::placeholder {
+  color: var(--infoTextColor);
+}
+
+.dark-mode .login-card {
+  background-color: var(--secondaryBackgroundColor);
+  /* Already set in dark-mode variables */
+  color: var(--textColor);
+  border: 1px solid var(--buttonHighlightColor);
+}
+
+.input-group input:focus+label,
+.input-group input:not(:placeholder-shown)+label,
+.input-group input.focused+label,
+.input-group label.focused,
+.input-group .react-datepicker input.date-picker-not-empty+label {
+  top: 0;
+  font-size: 12px;
+  color: hsl(217, 90%, 43%);
+  background: #fff;
 }
