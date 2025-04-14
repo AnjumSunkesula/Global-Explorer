@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from './navbar';
 
 function CountryDetails() {
   const { code } = useParams();
+  const navigate = useNavigate();
   const [country, setCountry] = useState(null);
   const [error, setError] = useState(null);
   const [isSaved, setIsSaved] = useState(false);
@@ -45,7 +46,16 @@ function CountryDetails() {
   };
 
   if (error) return <div>Error: {error}</div>;
-  if (!country) return <div> Loading...</div>;
+  if (!country) return <div> <span className='spinner-border spinner-border-sm'></span>Loading...</div>;
+
+   const currencies = country.currencies
+    ? Object.values(country.currencies).map((cur) => `${cur.name} (${cur.symbol})`).join(", ")
+    : "N/A";
+
+  const borders = country.borders?.length
+    ? country.borders.join(", ")
+    : "None";
+
 
   return (
     <div>
@@ -72,8 +82,24 @@ function CountryDetails() {
                 <strong>Languages:</strong>{" "}
                 {Object.values(country.languages || {}).join(", ") || "N/A"}
               </p>
+
+               <p className="card-text">
+                <strong>Currencies:</strong>{" "}
+                {country.currencies
+                  ? Object.entries(country.currencies)
+                      .map(([code, { name, symbol }]) => `${name} (${symbol || code})`)
+                      .join(", ")
+                  : "N/A"}
+              </p>
               <p className="card-text"><strong>Region:</strong> {country.region}</p>
               <p className="card-text"><strong>Subregion:</strong> {country.subregion || "N/A"}</p>
+
+               <p className="card-text">
+                  <strong>Borders:</strong>{" "}
+                  {country.borders && country.borders.length > 0
+                    ? country.borders.join(", ")
+                    : "None"}
+                </p>
 
               <button
                 onClick={handleSaveCountry}
@@ -82,6 +108,9 @@ function CountryDetails() {
               >
                 {isSaved ? 'Saved ✅' : 'Save'}
               </button>
+              <button className="btn btn-outline-secondary mb-4" onClick={() => navigate(-1)}>
+          ⬅ Back
+        </button>
             </div>
           </div>
         </div>
