@@ -34,14 +34,14 @@ function CountrySearch() {
 
       {/* Scrollable Grid */}
       <div
-        className="row overflow-auto px-2"
+        className="row overflow-auto px-2 justify-content-between justify-content-md-between"
         style={{ maxHeight: '500px', gap: '1rem' }}
       >
         {filteredCountries.length > 0 ? (
           filteredCountries.map((country) => (
             <div
               key={country.cca3}
-              className="col-sm-6 col-md-4 col-lg-3 mb-3"
+              className="col-sm-6 col-md-5 col-lg-3 mb-3"
             >
               <div className="card shadow-sm h-100">
                 <img
