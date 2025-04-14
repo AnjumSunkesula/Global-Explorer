@@ -16,10 +16,32 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <Navbar/>
-      <h1>Explore the World</h1>
-      <CountrySearch countries={countries} />
+     <div className="d-flex flex-column min-vh-100">
+      <Navbar />
+      {/* Hero Section */}
+      <section className="hero bg-primary text-white text-center py-5">
+        <div className="container">
+          <h1 className="display-4 mb-3">Explore the World</h1>
+          <p className="lead mb-4">
+            Discover countries, cultures, and fascinating facts all in one place.
+          </p>
+        </div>
+      </section>
+
+      {/* Search Section */}
+       <main className="flex-fill bg-light py-4">
+        <div className="container">
+          <h2 className="text-center mb-4">Search Countries</h2>
+          <CountrySearch countries={countries} />
+        </div>
+      </main>
+
+      {/* Footer Section */}
+      <footer className="footer bg-dark text-white text-center py-4 mt-auto fixed-bottom">
+        <div className="container">
+          <p className="mb-0">Created with ❤️ by Your Name</p>
+        </div>
+      </footer>
     </div>
   );
 }
