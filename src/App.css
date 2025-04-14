@@ -47,6 +47,8 @@
 .slider:hover .icon-right {
   transform: scale(1.2);
 }
+
+
 /* Light mode glow (sun-side) */
 .switch:hover .slider:not(.dark) {
   box-shadow: 0 0 5px 2px rgb(250, 172, 78);
@@ -99,11 +101,12 @@ body, .app {
   border-radius: 8px;
   padding: 10px 15px;
   text-decoration: none;
+  display: inline-block;
   
 }
 .btn-custom:hover{
   cursor: pointer;
-  transform: translateY(-13px);
+  transform: translateY(-3px);
 }
 .dark-mode .btn-custom{
   border: 1px solid var(--buttonHighlightColor);
