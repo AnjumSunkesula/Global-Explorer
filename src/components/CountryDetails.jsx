@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Navbar from './navbar';
 
 function CountryDetails() {
   const { code } = useParams();
@@ -44,19 +45,47 @@ function CountryDetails() {
   };
 
   if (error) return <div>Error: {error}</div>;
-  if (!country) return <div>Loading...</div>;
+  if (!country) return <div> Loading...</div>;
 
   return (
     <div>
-      <h1>{country.name.common}</h1>
-      <p>Capital: {country.capital}</p>
-      <p>Population: {country.population}</p>
-      <p>Languages: {Object.values(country.languages || {}).join(', ')}</p>
-      <img src={country.flags?.png || country.flags?.svg} alt={`${country.name.common} flag`} width="150" />
-      
-      <button onClick={handleSaveCountry} disabled={isSaved} className="save-button">
-        {isSaved ? 'Saved ✅' : 'Save'}
-      </button>
+      <Navbar/>
+      <div className="card shadow-lg container">
+        <div className="row g-0">
+          {/* Flag */}
+          <div className="col-md-4 text-center p-4">
+            <img
+              src={country.flags?.png || country.flags?.svg}
+              alt={`${country.name.common} flag`}
+              className="img-fluid rounded"
+              style={{ maxHeight: "250px", objectFit: "contain" }}
+            />
+          </div>
+
+          {/* Info */}
+          <div className="col-md-8">
+            <div className="card-body">
+              <h2 className="card-title mb-3">{country.name.common}</h2>
+              <p className="card-text"><strong>Capital:</strong> {country.capital || "N/A"}</p>
+              <p className="card-text"><strong>Population:</strong> {country.population.toLocaleString()}</p>
+              <p className="card-text">
+                <strong>Languages:</strong>{" "}
+                {Object.values(country.languages || {}).join(", ") || "N/A"}
+              </p>
+              <p className="card-text"><strong>Region:</strong> {country.region}</p>
+              <p className="card-text"><strong>Subregion:</strong> {country.subregion || "N/A"}</p>
+
+              <button
+                onClick={handleSaveCountry}
+                disabled={isSaved}
+                className={`btn btn-${isSaved ? 'success' : 'primary'} mt-3`}
+              >
+                {isSaved ? 'Saved ✅' : 'Save'}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
