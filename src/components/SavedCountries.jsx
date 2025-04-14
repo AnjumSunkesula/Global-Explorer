@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Navbar from './navbar';
+
 
 function SavedCountries() {
   const [savedCountries, setSavedCountries] = useState(
@@ -21,6 +23,7 @@ function SavedCountries() {
 
   return (
     <div>
+      <Navbar/>
       <h1>Saved Countries</h1>
       <ul>
         {savedCountries.map((country) => (
