@@ -120,7 +120,7 @@ html {
 }
 
 /* LOGIN */
-.login-wrapper {
+/* .login-wrapper {
   background-color: var(--backgroundColor);
   color: var(--textColor);
   transition: background-color 0.4s ease, color 0.4s ease;
@@ -147,4 +147,65 @@ html {
   background-color: var(--secondaryBackgroundColor);
   color: var(--textColor);
   border: 1px solid var(--buttonHighlightColor);
+} */
+/* OFFCANVAS */
+.custom-offcanvas {
+  transition: transform 0.5s ease-out !important;
+  /* Smooth transition for opening */
+}
+/* COUNTRY SEARCH */
+.search-container{
+  min-height: 500px;
+}
+.hero {
+  background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    /* optional for better text visibility */
+}
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+}
+
+.hero-content .btn {
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  margin-top: 20px;
+}
+.country-search {
+  background-color: #f4f4f4;
+  padding: 50px 0;
+}
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 15px 15px 5px rgba(0, 0, 0, 0.1);
+}
+.card-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.card-body {
+  padding: 1.2rem;
+}
+/* flags */
+.card-img-top {
+  width: 100%;
+  height: 150px;
+  /* object-fit: cover; */
+  object-fit: contain;
+  border-bottom: 1px solid #ddd;
 }
