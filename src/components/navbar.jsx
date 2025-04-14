@@ -14,7 +14,7 @@ const Navbar = () => {
     </button>
 
     {/* Offcanvas Menu */}
-    <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div className="offcanvas offcanvas-end custom-offcanvas" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div className="offcanvas-header">
         <h5 className="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
         <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -22,7 +22,7 @@ const Navbar = () => {
       <div className="offcanvas-body">
         <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li className="nav-item">
-            <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+            <Link className="nav-link active" aria-current="page" to="/home">Home</Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/saved">Saved Countries</Link>
@@ -34,6 +34,7 @@ const Navbar = () => {
       </div>
     </div>
   </div>
+   <div className="custom-offcanvas-backdrop"></div>
 </nav>
 
   );
