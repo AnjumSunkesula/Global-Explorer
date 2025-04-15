@@ -64,8 +64,8 @@ function CountryDetails() {
   return (
     <div>
       <Navbar/>
-      <div className="card shadow-lg container">
-        <div className="row g-0">
+      <div className="card shadow-lg container" style={{ marginTop: '75px'}}>
+        <div className="row g-0 ">
           {/* Flag */}
           <div className="col-md-4 text-center p-4">
             <img
