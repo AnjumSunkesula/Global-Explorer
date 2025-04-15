@@ -46,15 +46,19 @@ function CountryDetails() {
   };
 
   if (error) return <div>Error: {error}</div>;
-  if (!country) return <div> <span className='spinner-border spinner-border-sm'></span>Loading...</div>;
+  if (!country) {
+  return (
+    <div className="d-flex align-items-center justify-content-center vh-100">
+      <div className="text-center">
+        <div className="spinner-border text-primary mb-3" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <div>Loading...</div>
+      </div>
+    </div>
+  );
+}
 
-   const currencies = country.currencies
-    ? Object.values(country.currencies).map((cur) => `${cur.name} (${cur.symbol})`).join(", ")
-    : "N/A";
-
-  const borders = country.borders?.length
-    ? country.borders.join(", ")
-    : "None";
 
 
   return (
@@ -101,16 +105,21 @@ function CountryDetails() {
                     : "None"}
                 </p>
 
-              <button
-                onClick={handleSaveCountry}
-                disabled={isSaved}
-                className={`btn btn-${isSaved ? 'success' : 'primary'} mt-3`}
-              >
-                {isSaved ? 'Saved ✅' : 'Save'}
-              </button>
-              <button className="btn btn-outline-secondary mb-4" onClick={() => navigate(-1)}>
-          ⬅ Back
-        </button>
+                <div className="d-flex align-items-center justify-content-center gap-3 mt-4">
+                  <button
+                    onClick={handleSaveCountry}
+                    disabled={isSaved}
+                    className={`btn btn-${isSaved ? 'success' : 'primary'}`}
+                  >
+                    {isSaved ? 'Saved ✅' : 'Save'}
+                  </button>
+
+                  <button className="btn btn-outline-secondary" onClick={() => navigate(-1)}>
+                    ⬅ Back
+                  </button>
+                </div>
+
+
             </div>
           </div>
         </div>
