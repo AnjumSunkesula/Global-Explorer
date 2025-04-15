@@ -43,19 +43,19 @@ function CountrySearch() {
               key={country.cca3}
               className="col-sm-6 col-md-4 col-lg-3 mb-3"
             >
-              <div className="card shadow-sm h-100">
+              <div className="card h-100">
                 <img
                   src={country.flags.png}
-                  className="card-img-top"
+                  className="card-img-top object-fit-fill"
                   alt={`${country.name.common} flag`}
-                  style={{ height: '160px', objectFit: 'cover' }}
+                  style={{ height: '160px'}}
                 />
                 <div className="card-body text-center d-flex flex-column justify-content-between">
                   <h5 className="card-title">{country.name.common}</h5>
                   <div className="d-flex justify-content-center gap-2 mt-2">
                     <Link
                       to={`/country/${country.cca3}`}
-                      className="btn btn-outline-primary btn-sm"
+                      className="btn-custom"
                     >
                       View Details
                     </Link>
@@ -63,7 +63,7 @@ function CountrySearch() {
                       href={`https://en.wikipedia.org/wiki/${country.name.common}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn btn-outline-secondary btn-sm"
+                      className="btn-custom"
                     >
                       Learn More
                     </a>
