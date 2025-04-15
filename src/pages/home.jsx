@@ -19,7 +19,7 @@ function Home() {
      <div className="d-flex flex-column min-vh-100">
       <Navbar />
       {/* Hero Section */}
-      <section className="hero bg-primary text-white text-center py-5  mt-5">
+      <section className="hero text-white text-center py-5  mt-5">
         <div className="container">
           <h1 className="display-4 mb-3">Explore the World</h1>
           <p className="lead mb-4">
@@ -29,7 +29,7 @@ function Home() {
       </section>
 
       {/* Search Section */}
-       <main className="flex-fill bg-light py-4">
+       <main className="flex-fill py-4">
         <div className="container">
           <h2 className="text-center mb-4">Search Countries</h2>
           <CountrySearch countries={countries} />
@@ -37,7 +37,7 @@ function Home() {
       </main>
 
       {/* Footer Section */}
-      <footer className="footer bg-dark text-white text-center py-4 mt-auto fixed-bottom">
+      <footer className="footer text-center py-4 mt-auto fixed-bottom">
         <div className="container">
           <p className="mb-0">Explore the world with us! Discover countries, cultures, and much more.</p>
           <p className="mb-0">Created by Anjum | All Rights Reserved &copy; {new Date().getFullYear()}</p>
