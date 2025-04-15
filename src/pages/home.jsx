@@ -39,9 +39,11 @@ function Home() {
       {/* Footer Section */}
       <footer className="footer bg-dark text-white text-center py-4 mt-auto fixed-bottom">
         <div className="container">
-          <p className="mb-0">Created with ❤️ by Your Name</p>
+          <p className="mb-0">Explore the world with us! Discover countries, cultures, and much more.</p>
+          <p className="mb-0">Created by Anjum | All Rights Reserved &copy; {new Date().getFullYear()}</p>
         </div>
       </footer>
+      
     </div>
   );
 }
