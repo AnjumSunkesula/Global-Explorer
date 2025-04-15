@@ -79,15 +79,15 @@ function CountryDetails() {
           {/* Info */}
           <div className="col-md-8">
             <div className="card-body">
-              <h2 className="card-title mb-3">{country.name.common}</h2>
-              <p className="card-text"><strong>Capital:</strong> {country.capital || "N/A"}</p>
-              <p className="card-text"><strong>Population:</strong> {country.population.toLocaleString()}</p>
-              <p className="card-text">
+              <h2 className="mb-3">{country.name.common}</h2>
+              <p><strong>Capital:</strong> {country.capital || "N/A"}</p>
+              <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
+              <p>
                 <strong>Languages:</strong>{" "}
                 {Object.values(country.languages || {}).join(", ") || "N/A"}
               </p>
 
-               <p className="card-text">
+               <p>
                 <strong>Currencies:</strong>{" "}
                 {country.currencies
                   ? Object.entries(country.currencies)
@@ -95,21 +95,21 @@ function CountryDetails() {
                       .join(", ")
                   : "N/A"}
               </p>
-              <p className="card-text"><strong>Region:</strong> {country.region}</p>
-              <p className="card-text"><strong>Subregion:</strong> {country.subregion || "N/A"}</p>
+              <p><strong>Region:</strong> {country.region}</p>
+              <p><strong>Subregion:</strong> {country.subregion || "N/A"}</p>
 
-               <p className="card-text">
+               <p>
                   <strong>Borders:</strong>{" "}
                   {country.borders && country.borders.length > 0
                     ? country.borders.join(", ")
                     : "None"}
                 </p>
 
-                <div className="d-flex align-items-center justify-content-center gap-3 mt-4">
+                <div className="d-flex align-items-center gap-3 mt-4">
                   <button
                     onClick={handleSaveCountry}
                     disabled={isSaved}
-                    className={`btn btn-${isSaved ? 'success' : 'primary'}`}
+                    className={`btn px-4 btn-${isSaved ? 'success' : 'primary'}`}
                   >
                     {isSaved ? 'Saved ✅' : 'Save'}
                   </button>
