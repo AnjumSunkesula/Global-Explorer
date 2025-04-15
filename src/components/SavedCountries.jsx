@@ -22,17 +22,41 @@ function SavedCountries() {
   };
 
   return (
-    <div>
-      <Navbar/>
-      <h1>Saved Countries</h1>
-      <ul>
-        {savedCountries.map((country) => (
-          <li key={country.cca3}>
-            {country.name.common} 
-            <button onClick={() => removeCountry(country.cca3)}>Remove</button>
-          </li>
-        ))}
-      </ul>
+    <div className="d-flex flex-column min-vh-100">
+      <Navbar />
+      <div className="container my-5  flex-fill overflow-auto">
+        <h2 className="text-center mt-5 mb-4">Saved Countries</h2>
+
+        {savedCountries.length === 0 ? (
+          <div className="alert alert-info text-center">No saved countries yet.</div>
+        ) : (
+          <div className="row g-4">
+            {savedCountries.map((country) => (
+              <div className="col-md-3" key={country.cca3}>
+                <div className="card h-100 shadow-sm">
+                  <img
+                    src={country.flags?.png || country.flags?.svg}
+                    alt={`${country.name.common} flag`}
+                    className="card-img-top"
+                    style={{ height: '180px', objectFit: 'cover' }}
+                  />
+                  <div className="card-body d-flex flex-column">
+                    <h5 className="card-title">{country.name.common}</h5>
+                    <p className="card-text mb-2"><strong>Capital:</strong> {country.capital || "N/A"}</p>
+                    <p className="card-text"><strong>Region:</strong> {country.region}</p>
+                    <button
+                      className="btn btn-danger mt-auto"
+                      onClick={() => removeCountry(country.cca3)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
