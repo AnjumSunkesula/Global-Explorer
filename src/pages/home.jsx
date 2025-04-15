@@ -19,7 +19,7 @@ function Home() {
      <div className="d-flex flex-column min-vh-100">
       <Navbar />
       {/* Hero Section */}
-      <section className="hero bg-primary text-white text-center py-5">
+      <section className="hero bg-primary text-white text-center py-5  mt-5">
         <div className="container">
           <h1 className="display-4 mb-3">Explore the World</h1>
           <p className="lead mb-4">
