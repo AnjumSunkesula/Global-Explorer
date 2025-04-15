@@ -80,10 +80,10 @@ input:checked + .slider {
 }
 
 /* Dark mode global styles */
-.dark-mode {
+/* .dark-mode {
   background-color: #333;
   color: #fff;
-}
+} */
 
 /* BODY AND APP */
 body, .app {
@@ -148,10 +148,7 @@ html {
   color: var(--textColor);
   border: 1px solid var(--buttonHighlightColor);
 } */
-/* OFFCANVAS */
-.custom-offcanvas {
-  transition: transform 0.5s ease-out !important;
-}
+
 /* COUNTRY SEARCH */
 .search-container{
   min-height: 500px;
@@ -170,19 +167,18 @@ html {
 }
 .card:hover {
   transform: scale(1.05);
-  transition: transform 0.3s ease-in-out;
   box-shadow: 0 8px 15px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
 }
-/* flags */
 /* DARKMODE FOR HOME */
 .dark-mode .container {
   background-color: transparent;
 }
-
 .dark-mode .card {
-  background-color: #2b2b2b;
+  background-color: rgba(255, 255, 255, 0.05);
   color: white;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
 }
 .dark-mode input,.dark-mode select {
   background-color: #ccc;
@@ -212,4 +208,19 @@ html {
 .dark-mode .footer {
   background-color: #1c1c1c;
   color: #ccc;
+}
+/* OFFCANVAS */
+.custom-offcanvas {
+  transition: transform 0.5s ease-out !important;
+}
+/* DARKMODE OFFCANVAS */
+.dark-mode .navbar-toggler-icon  {
+  filter: invert(1);
+}
+.dark-mode .custom-offcanvas {
+  background-color: #1c1c1c !important;
+  color: white;
+}
+.dark-mode .custom-offcanvas .btn-close {
+  filter: invert(1);
 }
