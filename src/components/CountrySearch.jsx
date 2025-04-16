@@ -1,19 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function CountrySearch() {
-  const [countries, setCountries] = useState([]);
+function CountrySearch({ countries }) {
   const [search, setSearch] = useState('');
-
-  useEffect(() => {
-    const fetchCountries = async () => {
-      const response = await fetch('https://restcountries.com/v3.1/all');
-      const data = await response.json();
-      setCountries(data);
-    };
-
-    fetchCountries();
-  }, []);
 
   const filteredCountries = countries.filter(country =>
     country.name.common.toLowerCase().includes(search.toLowerCase())
