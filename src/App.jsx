@@ -9,7 +9,6 @@ import SavedCountries from "./components/SavedCountries";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute"; // NEW
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { FaSun } from "react-icons/fa";
 import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 
 
@@ -37,10 +36,9 @@ function App() {
           />
           <span className="slider">
              <FontAwesomeIcon icon={faSun} className="icon-left" />
-      <FontAwesomeIcon icon={faMoon} className="icon-right" />
+             <FontAwesomeIcon icon={faMoon} className="icon-right" />
           </span>
         </label>
-
       </div>
       <Router>
         <Routes>
@@ -69,5 +67,4 @@ function App() {
     </>
   )
 }
-
 export default App;
