@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-function Login({ darkMode }) {
+import { LuEyeClosed } from "react-icons/lu";
+import { BsEyeFill } from "react-icons/bs";
+function Login() {
 
   const navigate = useNavigate();
 
@@ -37,6 +38,14 @@ function Login({ darkMode }) {
     );
   };
 
+  const togglePassword = () => {
+    setVisiblePassword(!visiblePassword);
+  }
+
+  const toggleConfirmPassword = () => {
+    setVisibleConfirmPassword(!confirmPassword);
+  }
+
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
     const errors = {};
@@ -48,14 +57,10 @@ function Login({ darkMode }) {
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = "Invalid email";
     }
-    if (!formData.dateOfBirth.trim()) {
-      errors.dateOfBirth = "Date of Birth is required";
-    }
     if (!formData.password) {
       errors.password = "Password is required";
     } else if (!isValidPassword(formData.password)) {
-      errors.password =
-        "Password must be 8+ characters with symbol, number, uppercase and lowercase.";
+      errors.password = "Password must be 8+ characters with symbol, number, uppercase and lowercase.";
     }
     if (formData.confirmPassword !== formData.password) {
       errors.confirmPassword = "Passwords must match";
@@ -79,7 +84,8 @@ function Login({ darkMode }) {
     localStorage.setItem("users", JSON.stringify(updatedUsers));
 
     alert("Registration successful!");
-    setIsRegister(false); // switch to login view after registration
+     localStorage.setItem("isAuthenticated", "true"); // set auth status
+     navigate("/home"); // ✅ redirect to home page
   }
   };
 
@@ -113,7 +119,6 @@ function Login({ darkMode }) {
       return;
     }
 
-    alert("Login successful!");
     localStorage.setItem("isAuthenticated", "true");
     navigate("/home");
   }
@@ -122,102 +127,113 @@ function Login({ darkMode }) {
 
 
   return (
-    <div className="min-vh-100 d-flex align-items-center justify-content-center login-wrapper">
+    <div className="vh-100 d-flex flex-column p-3 flex-md-row align-items-md-center justify-content-start  justify-content-md-between gap-md-5">
+      <div className="d-flex flex-column mb-3 ps-md-5">
+        <div className="title text-uppercase">{isRegister ? "Create your own account" : "Welcome back! Log in to continue."}</div>
+        <div className="title-caption">
+          {isRegister ? (
+            <>
+              Already have an account?{" "} {/* to add space between span and heading */}
+              <span onClick={() => setIsRegister(false)} className="text-capitalize text-primary">login</span>
+            </>
+          ) : (
+            <> 
+              Don't have an account?{" "} 
+              <span onClick={() => setIsRegister(true)} className="text-capitalize text-primary">register</span>
+            </>
 
-      <div className="card p-4 shadow-lg login-card" style={{ maxWidth: "500px", width: "100%" }}>
-        <h3 className="text-center mb-4">{isRegister ? "Register" : "Login"}</h3>
-
+          )}
+        </div>
+      </div>
+      <div className="d-flex pe-md-5">
         <form onSubmit={isRegister ? handleRegisterSubmit : handleLoginSubmit}>
           {isRegister && (
-            <>
-              <div className="mb-3">
-                <input
-                  type="text"
-                  name="firstName"
-                  className="form-control"
-                  placeholder="First Name"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                />
-                {formErrors.firstName && <small className="text-danger">{formErrors.firstName}</small>}
-              </div>
-              <div className="mb-3">
-                <input
-                  type="text"
-                  name="lastName"
-                  className="form-control"
-                  placeholder="Last Name"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                />
-                {formErrors.lastName && <small className="text-danger">{formErrors.lastName}</small>}
-              </div>
-              
-            </>
+            <div className="d-md-flex gap-2">
+                <div className="mb-3 d-flex flex-column">
+                  <input
+                    type="text"
+                    name="firstName"
+                    className="form-inputs"
+                    placeholder="First Name"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                  />
+                  {formErrors.firstName && <small className="text-danger mt-1">{formErrors.firstName}</small>}
+                </div>
+                <div className="mb-3 d-flex flex-column">
+                  <input
+                    type="text"
+                    name="lastName"
+                    className="form-inputs"
+                    placeholder="Last Name"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                  />
+                  {formErrors.lastName && <small className="text-danger mt-1">{formErrors.lastName}</small>}
+                </div>
+            </div>
           )}
 
-          <div className="mb-3">
+          <div className="mb-3 d-flex flex-column">
             <input
               type="email"
               name="email"
-              className="form-control"
+              className="form-inputs email-input"
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
             />
-            {formErrors.email && <small className="text-danger">{formErrors.email}</small>}
+            {formErrors.email && <small className="text-danger mt-1">{formErrors.email}</small>}
           </div>
 
-          <div className="mb-3">
-            <input
-              type={visiblePassword ? "text" : "password"}
-              name="password"
-              className="form-control"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-            <small onClick={() => setVisiblePassword((v) => !v)} style={{ cursor: "pointer" }}>
-              {visiblePassword ? "Hide" : "Show"} password
-            </small>
-            {formErrors.password && <div className="text-danger">{formErrors.password}</div>}
-          </div>
-
-          {isRegister && (
-            <div className="mb-3">
-              <input
-                type={visibleConfirmPassword ? "text" : "password"}
-                name="confirmPassword"
-                className="form-control"
-                placeholder="Confirm Password"
-                value={formData.confirmPassword}
+          <div className="d-md-flex gap-2">
+            <div className="mb-3 d-flex flex-column">
+              <div className="input-container">
+                <input
+                type={visiblePassword ? "text" : "password"}
+                name="password"
+                className="form-inputs"
+                placeholder="Password"
+                value={formData.password}
                 onChange={handleChange}
               />
-              <small onClick={() => setVisibleConfirmPassword((v) => !v)} style={{ cursor: "pointer" }}>
-                {visibleConfirmPassword ? "Hide" : "Show"} confirm password
-              </small>
-              {formErrors.confirmPassword && <div className="text-danger">{formErrors.confirmPassword}</div>}
+                <span onClick={togglePassword} className="password-toggle-icon">
+                  {visiblePassword ? <LuEyeClosed /> : <BsEyeFill />} 
+                </span>
+              </div>
+              {formErrors.password && <div className="text-danger mt-1  d-block">{formErrors.password}</div>}
             </div>
-          )}
 
-          <button type="submit" className="btn btn-primary w-100">
+            {isRegister && (
+              <div className="mb-3 d-flex flex-column">
+                <div className="input-container">
+                  <input
+                    type={visibleConfirmPassword ? "text" : "password"}
+                    name="confirmPassword"
+                    className="form-inputs"
+                    placeholder="Confirm Password"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                  />
+                  <span
+                    className="password-toggle-icon"
+                    onClick={toggleConfirmPassword}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {visibleConfirmPassword ? <LuEyeClosed /> : <BsEyeFill />}
+                  </span>
+                </div>
+                {formErrors.confirmPassword && <div className="text-danger mt-1">{formErrors.confirmPassword}</div>}
+              </div>
+            )}
+          </div>
+
+
+          <button type="submit" className="btn-custom text-center w-100">
             {isRegister ? "Register" : "Login"}
           </button>
         </form>
-
-        <div className="text-center mt-3">
-          <p>
-            {isRegister ? "Already have an account?" : "Don't have an account?"}{" "}
-            <span
-              className="text-primary"
-              role="button"
-              onClick={() => setIsRegister(!isRegister)}
-            >
-              {isRegister ? "Login" : "Register"}
-            </span>
-          </p>
         </div>
-      </div>
     </div>
   );
 }
