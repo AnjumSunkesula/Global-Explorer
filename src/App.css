@@ -119,6 +119,8 @@ html {
   color: var(--textColor);
 }
 
+
+
 /* LOGIN */
 /* .login-wrapper {
   background-color: var(--backgroundColor);
@@ -149,6 +151,62 @@ html {
   border: 1px solid var(--buttonHighlightColor);
 } */
 
+
+
+/* LOGIN */
+.input-container {
+  position: relative;
+  width: 100%;
+}
+@media screen and (width: 768px) {
+  .form-inputs{
+    width: 155px;
+  }
+  .email-input{
+    width: 320px;
+  }
+  .title{
+    font-size: 20px;
+  }
+  .title-caption{
+    font-size: 15px;
+  }
+}
+@media screen and (min-width : 1024px) {
+  .form-inputs {
+    width: 250px;
+  }
+  .email-input {
+    width: 510px;
+  }
+  .title{
+    font-size: 35px;
+  }
+  .title-caption{
+    font-size: 20px;
+  }
+}
+.form-inputs {
+  padding-right: 40px;
+  border-radius: 5px;
+  border: none;
+  padding: 8px;
+}
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+}
+/* DARKMODE FOR LOGIN */
+.dark-mode .password-toggle-icon{
+  color: #1c1c1c;
+}
+.btn-custom{
+  border: none;
+}
+
 /* COUNTRY SEARCH */
 .search-container{
   min-height: 500px;
@@ -170,6 +228,7 @@ html {
   box-shadow: 0 8px 15px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
 }
+
 /* DARKMODE FOR HOME */
 .dark-mode .container {
   background-color: transparent;
@@ -184,6 +243,7 @@ html {
   background-color: #ccc;
   color: white;
 }
+
 /* NAVBAR */
 .navbar{
   background-color: #f4f4f4;
@@ -201,6 +261,7 @@ html {
 .dark-mode .navbar .nav-link:hover {
   color: #ccc !important;
 }
+
 /* FOOTER */
 .footer{
   background-color: #f4f4f4;
@@ -209,6 +270,7 @@ html {
   background-color: #1c1c1c;
   color: #ccc;
 }
+
 /* OFFCANVAS */
 .custom-offcanvas {
   transition: transform 0.5s ease-out !important;
