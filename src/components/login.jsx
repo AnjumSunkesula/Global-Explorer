@@ -198,7 +198,7 @@ function Login() {
                 <input
                   type={visiblePassword ? "text" : "password"}
                   name="password"
-                  className="form-inputs form-control"
+                  className={`form-control form-inputs ${!isRegister ? 'login-password' : ''}`}
                   placeholder="Password"
                   value={formData.password}
                   onChange={handleChange}
