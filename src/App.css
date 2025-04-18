@@ -162,7 +162,7 @@ html {
   .form-inputs{
     width: 155px;
   }
-  .email-input{
+  .email-input, .login-password{
     width: 320px;
   }
   .title{
@@ -176,21 +176,23 @@ html {
   .form-inputs {
     width: 250px;
   }
-  .email-input {
+  .email-input, .login-password {
     width: 510px;
   }
   .title{
-    font-size: 35px;
+    font-size: 30px;
   }
   .title-caption{
     font-size: 20px;
+  }
+  .register-password{
+    width: 250px;
   }
 }
 .form-inputs {
   padding-right: 40px;
   border-radius: 5px;
   border: none;
-  padding: 8px;
 }
 .password-toggle-icon {
   position: absolute;
@@ -198,6 +200,9 @@ html {
   right: 10px;
   transform: translateY(-50%);
   font-size: 1.2rem;
+}
+input:focus{
+  outline: none;
 }
 /* DARKMODE FOR LOGIN */
 .dark-mode .password-toggle-icon{
@@ -240,8 +245,7 @@ html {
   transition: all 0.3s ease;
 }
 .dark-mode input,.dark-mode select {
-  background-color: #ccc;
-  color: white;
+  color: black;
 }
 
 /* NAVBAR */
