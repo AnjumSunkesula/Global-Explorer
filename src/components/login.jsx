@@ -43,7 +43,7 @@ function Login() {
   }
 
   const toggleConfirmPassword = () => {
-    setVisibleConfirmPassword(!confirmPassword);
+    setVisibleConfirmPassword(!visibleConfirmPassword);
   }
 
   const handleRegisterSubmit = (e) => {
@@ -85,7 +85,7 @@ function Login() {
 
     alert("Registration successful!");
      localStorage.setItem("isAuthenticated", "true"); // set auth status
-     navigate("/home"); // ✅ redirect to home page
+     navigate("/home");
   }
   };
 
@@ -134,12 +134,12 @@ function Login() {
           {isRegister ? (
             <>
               Already have an account?{" "} {/* to add space between span and heading */}
-              <span onClick={() => setIsRegister(false)} className="text-capitalize text-primary">login</span>
+              <span onClick={() => setIsRegister(false)} className="text-capitalize text-primary" style={{cursor: 'pointer'}}>login</span>
             </>
           ) : (
             <> 
               Don't have an account?{" "} 
-              <span onClick={() => setIsRegister(true)} className="text-capitalize text-primary">register</span>
+              <span onClick={() => setIsRegister(true)} className="text-capitalize text-primary" style={{cursor: 'pointer'}}>register</span>
             </>
 
           )}
@@ -149,54 +149,62 @@ function Login() {
         <form onSubmit={isRegister ? handleRegisterSubmit : handleLoginSubmit}>
           {isRegister && (
             <div className="d-md-flex gap-2">
-                <div className="mb-3 d-flex flex-column">
+                <div className="mb-3 form-floating d-flex flex-column">
                   <input
                     type="text"
                     name="firstName"
-                    className="form-inputs"
+                    className="form-inputs form-control"
                     placeholder="First Name"
                     value={formData.firstName}
                     onChange={handleChange}
+                    id="first-name"
                   />
+                  <label for="first-name">First Name</label>
                   {formErrors.firstName && <small className="text-danger mt-1">{formErrors.firstName}</small>}
                 </div>
-                <div className="mb-3 d-flex flex-column">
+                <div className="mb-3 form-floating d-flex flex-column">
                   <input
                     type="text"
                     name="lastName"
-                    className="form-inputs"
+                    className="form-inputs form-control"
                     placeholder="Last Name"
                     value={formData.lastName}
                     onChange={handleChange}
+                    id="last-name"
                   />
+                  <label for="last-name">Last Name</label>
                   {formErrors.lastName && <small className="text-danger mt-1">{formErrors.lastName}</small>}
                 </div>
             </div>
           )}
 
-          <div className="mb-3 d-flex flex-column">
+          <div className="mb-3 form-floating d-flex flex-column">
             <input
               type="email"
               name="email"
-              className="form-inputs email-input"
+              className="form-inputs form-control email-input"
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
+              id="email"
             />
+            <label for="email">Email</label>
             {formErrors.email && <small className="text-danger mt-1">{formErrors.email}</small>}
           </div>
 
           <div className="d-md-flex gap-2">
             <div className="mb-3 d-flex flex-column">
-              <div className="input-container">
+              <div className="input-container form-floating">
                 <input
-                type={visiblePassword ? "text" : "password"}
-                name="password"
-                className="form-inputs"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-              />
+                  type={visiblePassword ? "text" : "password"}
+                  name="password"
+                  className="form-inputs form-control"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  id="password"
+                />
+                <label for="password">Password</label>
                 <span onClick={togglePassword} className="password-toggle-icon">
                   {visiblePassword ? <LuEyeClosed /> : <BsEyeFill />} 
                 </span>
@@ -206,19 +214,20 @@ function Login() {
 
             {isRegister && (
               <div className="mb-3 d-flex flex-column">
-                <div className="input-container">
+                <div className="input-container form-floating">
                   <input
                     type={visibleConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
-                    className="form-inputs"
+                    className="form-inputs form-control"
                     placeholder="Confirm Password"
                     value={formData.confirmPassword}
                     onChange={handleChange}
+                    id="confirm-password"
                   />
+                  <label for="confirm-password">Confirm Password</label>
                   <span
                     className="password-toggle-icon"
                     onClick={toggleConfirmPassword}
-                    style={{ cursor: "pointer" }}
                   >
                     {visibleConfirmPassword ? <LuEyeClosed /> : <BsEyeFill />}
                   </span>
