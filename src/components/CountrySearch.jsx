@@ -10,15 +10,16 @@ function CountrySearch({ countries }) {
 
   return (
      <div className="search-container overflow-x-hidden">
-      {/* Search Input */}
+      {/* Search Input */ }
       <div className="mb-4">
         <input
           type="text"
-          className="form-control form-control-lg"
+          className="form-control form-control-lg position-relative"
           placeholder="Search for a country..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+        <i className="bi bi-search position-absolute search-icon fs-4"></i>
       </div>
 
       {/* Scrollable Grid */}
