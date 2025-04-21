@@ -119,40 +119,6 @@ html {
   color: var(--textColor);
 }
 
-
-
-/* LOGIN */
-/* .login-wrapper {
-  background-color: var(--backgroundColor);
-  color: var(--textColor);
-  transition: background-color 0.4s ease, color 0.4s ease;
-}
-.login-card {
-  background-color: var(--secondaryBackgroundColor);
-  color: var(--textColor);
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-.login-card input,
-.login-card select,
-.login-card textarea {
-  background-color: var(--inputBackgroundColor);
-  color: var(--inputTextColor);
-  border: 1px solid var(--inputOutlineColor);
-}
-.login-card input::placeholder {
-  color: var(--infoTextColor);
-}
-.dark-mode .login-card {
-  background-color: var(--secondaryBackgroundColor);
-  color: var(--textColor);
-  border: 1px solid var(--buttonHighlightColor);
-} */
-
-
-
 /* LOGIN */
 .input-container {
   position: relative;
@@ -233,6 +199,19 @@ input:focus{
   box-shadow: 0 8px 15px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
 }
+.search-icon{
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+input[type=text]{
+  padding-left: 50px;
+}
+input:focus{
+  border: none !important;
+  box-shadow: none !important;
+}
 
 /* DARKMODE FOR HOME */
 .dark-mode .container {
@@ -244,10 +223,9 @@ input:focus{
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
-.dark-mode input,.dark-mode select {
+.dark-mode input,.dark-mode select, .dark-mode .search-icon {
   color: black;
 }
-
 /* NAVBAR */
 .navbar{
   background-color: #f4f4f4;
