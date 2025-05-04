@@ -1,4 +1,3 @@
-// src/components/LottieGlobe.jsx
 import React from 'react';
 import Lottie from 'lottie-react';
 import globeAnimation from '../animations/Animation - globe.json'; // Adjust the path if necessary
@@ -10,5 +9,4 @@ function LottieGlobe() {
     </div>
   );
 }
-
 export default LottieGlobe;

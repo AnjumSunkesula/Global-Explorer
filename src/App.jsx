@@ -8,8 +8,8 @@ import CountryDetails from "./components/CountryDetails";
 import SavedCountries from "./components/SavedCountries";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute"; // NEW
-import Navbar from './components/navbar';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 
 
 // import "./index.css"
@@ -27,10 +27,19 @@ function App() {
 
   return (
     <>
-      <button onClick={toggleTheme} className="theme-toggle-button">
-        {darkMode ? '☀️' : '🌙'}&nbsp;&nbsp;{darkMode ? 'Light Mode' : 'Dark Mode'}
-
-      </button>
+      <div className="theme-toggle-wrapper">
+        <label className="switch">
+          <input 
+            type="checkbox" 
+            checked={darkMode} 
+            onChange={toggleTheme} 
+          />
+          <span className="slider">
+             <FontAwesomeIcon icon={faSun} className="icon-left" />
+             <FontAwesomeIcon icon={faMoon} className="icon-right" />
+          </span>
+        </label>
+      </div>
       <Router>
         <Routes>
           <Route exact path='/' Component={WelcomePage}/>
@@ -58,5 +67,4 @@ function App() {
     </>
   )
 }
-
 export default App;

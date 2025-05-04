@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import Navbar from './navbar';
 
 function CountryDetails() {
   const { code } = useParams();
+  const navigate = useNavigate();
   const [country, setCountry] = useState(null);
   const [error, setError] = useState(null);
   const [isSaved, setIsSaved] = useState(false);
@@ -44,19 +46,84 @@ function CountryDetails() {
   };
 
   if (error) return <div>Error: {error}</div>;
-  if (!country) return <div>Loading...</div>;
+  if (!country) {
+  return (
+    <div className="d-flex align-items-center justify-content-center vh-100">
+      <div className="text-center">
+        <div className="spinner-border text-primary mb-3" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <div>Loading...</div>
+      </div>
+    </div>
+  );
+}
+
+
 
   return (
     <div>
-      <h1>{country.name.common}</h1>
-      <p>Capital: {country.capital}</p>
-      <p>Population: {country.population}</p>
-      <p>Languages: {Object.values(country.languages || {}).join(', ')}</p>
-      <img src={country.flags?.png || country.flags?.svg} alt={`${country.name.common} flag`} width="150" />
-      
-      <button onClick={handleSaveCountry} disabled={isSaved} className="save-button">
-        {isSaved ? 'Saved ✅' : 'Save'}
-      </button>
+      <Navbar/>
+      <div className="card shadow-lg container" style={{ marginTop: '75px'}}>
+        <div className="row g-0 ">
+          {/* Flag */}
+          <div className="col-md-4 text-center p-4">
+            <img
+              src={country.flags?.png || country.flags?.svg}
+              alt={`${country.name.common} flag`}
+              className="img-fluid rounded"
+              style={{ maxHeight: "250px", objectFit: "contain" }}
+            />
+          </div>
+
+          {/* Info */}
+          <div className="col-md-8">
+            <div className="card-body">
+              <h2 className="mb-3">{country.name.common}</h2>
+              <p><strong>Capital:</strong> {country.capital || "N/A"}</p>
+              <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
+              <p>
+                <strong>Languages:</strong>{" "}
+                {Object.values(country.languages || {}).join(", ") || "N/A"}
+              </p>
+
+               <p>
+                <strong>Currencies:</strong>{" "}
+                {country.currencies
+                  ? Object.entries(country.currencies)
+                      .map(([code, { name, symbol }]) => `${name} (${symbol || code})`)
+                      .join(", ")
+                  : "N/A"}
+              </p>
+              <p><strong>Region:</strong> {country.region}</p>
+              <p><strong>Subregion:</strong> {country.subregion || "N/A"}</p>
+
+               <p>
+                  <strong>Borders:</strong>{" "}
+                  {country.borders && country.borders.length > 0
+                    ? country.borders.join(", ")
+                    : "None"}
+                </p>
+
+                <div className="d-flex align-items-center gap-3 mt-4">
+                  <button
+                    onClick={handleSaveCountry}
+                    disabled={isSaved}
+                    className={`btn px-4 btn-${isSaved ? 'success' : 'primary'}`}
+                  >
+                    {isSaved ? 'Saved ✅' : 'Save'}
+                  </button>
+
+                  <button className="btn btn-outline-secondary" onClick={() => navigate(-1)}>
+                    ⬅ Back
+                  </button>
+                </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
