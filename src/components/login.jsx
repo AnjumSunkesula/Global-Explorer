@@ -38,14 +38,6 @@ function Login() {
     );
   };
 
-  const togglePassword = () => {
-    setVisiblePassword(!visiblePassword);
-  }
-
-  const toggleConfirmPassword = () => {
-    setVisibleConfirmPassword(!visibleConfirmPassword);
-  }
-
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
     const errors = {};
@@ -84,8 +76,8 @@ function Login() {
     localStorage.setItem("users", JSON.stringify(updatedUsers));
 
     alert("Registration successful!");
-     localStorage.setItem("isAuthenticated", "true"); // set auth status
-     navigate("/home");
+    localStorage.setItem("isAuthenticated", "true"); // set auth status
+    navigate("/home");
   }
   };
 
@@ -127,7 +119,7 @@ function Login() {
 
 
   return (
-    <div className="vh-100 d-flex flex-column p-3 flex-md-row align-items-md-center justify-content-start  justify-content-md-between gap-md-5">
+    <div className="vh-100 d-flex flex-column p-3 flex-md-row align-items-md-center justify-content-start  justify-content-md-between gap-md-5 login-box">
       <div className="d-flex flex-column mb-3 ps-md-5">
         <div className="title text-uppercase">{isRegister ? "Create your own account" : "Welcome back! Log in to continue."}</div>
         <div className="title-caption">
@@ -145,7 +137,7 @@ function Login() {
           )}
         </div>
       </div>
-      <div className="d-flex pe-md-5">
+      <div className="d-flex flex-column pe-md-5">
         <form onSubmit={isRegister ? handleRegisterSubmit : handleLoginSubmit}>
           {isRegister && (
             <div className="d-md-flex gap-2">
@@ -205,7 +197,7 @@ function Login() {
                   id="password"
                 />
                 <label for="password">Password</label>
-                <span onClick={togglePassword} className="password-toggle-icon">
+                <span onClick={() => setVisiblePassword(!visiblePassword)} className="password-toggle-icon">
                   {visiblePassword ? <LuEyeClosed /> : <BsEyeFill />} 
                 </span>
               </div>
@@ -227,7 +219,7 @@ function Login() {
                   <label for="confirm-password">Confirm Password</label>
                   <span
                     className="password-toggle-icon"
-                    onClick={toggleConfirmPassword}
+                    onClick={() => setVisibleConfirmPassword(!visibleConfirmPassword)}
                   >
                     {visibleConfirmPassword ? <LuEyeClosed /> : <BsEyeFill />}
                   </span>
@@ -242,7 +234,13 @@ function Login() {
             {isRegister ? "Register" : "Login"}
           </button>
         </form>
+        <div class="d-flex align-items-center my-3">
+          <hr class="flex-grow-1"/>
+          <span class="mx-2">OR</span>
+          <hr class="flex-grow-1"/>
         </div>
+        <div className="text-center text-capitalize guest-mode" onClick={() => navigate('/home')}>continue as guest</div>
+      </div>
     </div>
   );
 }

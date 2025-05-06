@@ -1,12 +1,19 @@
-# React + Vite
+# Global Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Global Explorer is a React-based web app that allows users to explore countries across the globe. The app offers detailed country information, including population, languages, currencies, region, and borders. It features an intuitive search functionality and interactive elements to provide a smooth user experience.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Country Search:** Search for any country by name with live filtering and autocomplete support.
+- **Country Details:** View detailed information about a specific country, including flag, capital, population, languages, currencies, region, and borders.
+- **Responsive Design:** A fully responsive UI that adapts seamlessly across devices using **Tailwind CSS**.
+- **Save Countries:** Save countries to your local storage for easy access.
+- **API Integration:** Fetch country data using the **REST Countries API**.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend:** React JS (React 19),Bootstrap 5
+- **API:** REST Countries API
+- **State Management:** React Hooks (`useState`, `useEffect`)
+- **Version Control:** Git, GitHub
+
