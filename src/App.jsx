@@ -12,7 +12,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 
 
-// import "./index.css"
 function App() {
 
   const [darkMode, setDarkMode] = useState(false);
@@ -45,11 +44,7 @@ function App() {
           <Route exact path='/' Component={WelcomePage}/>
           <Route path='/login' Component={Login} />  
 
-          <Route path="/home" element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          } />
+          <Route path="/home" element={<Home />} />
           <Route path="/country/:code" element={
             <ProtectedRoute>
               <CountryDetails />
