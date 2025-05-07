@@ -3,7 +3,7 @@ function WelcomePage () {
   return(
     <>
       <div className="d-flex flex-column justify-content-center min-vh-100 position-relative z-1" >
-        <video src="/public/Vdo.mp4" loop autoPlay muted></video>
+        <video src="/Vdo.mp4" loop autoPlay muted></video>
         <div className='text'>
           <div className="title position-absolute top-0 text-uppercase">global explorer</div>
           <div className='text-uppercase captions'>
