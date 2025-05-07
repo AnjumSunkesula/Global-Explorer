@@ -1,7 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LuEyeClosed } from "react-icons/lu";
 import { BsEyeFill } from "react-icons/bs";
+
+
+
+
+
+function useIsMobile(breakpoint = 426) {
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= breakpoint);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= breakpoint);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [breakpoint]);
+
+  return isMobile;
+}
+
+
+
+
 function Login() {
 
   const navigate = useNavigate();
@@ -116,11 +136,15 @@ function Login() {
   }
   };
 
+  const isMobile = useIsMobile();
+
+
 
 
   return (
-    <div className="vh-100 d-flex flex-column p-3 flex-md-row align-items-md-center justify-content-start  justify-content-md-between gap-md-5 login-box">
-      <div className="d-flex flex-column mb-3 ps-md-5">
+    <div className="vh-100 d-flex justify-content-center align-items-center login-container">
+      <div className="login-box">
+          <div className="d-flex flex-column mb-3 ps-md-4 title-box">
         <div className="title text-uppercase">{isRegister ? "Create your own account" : "Welcome back! Log in to continue."}</div>
         <div className="title-caption">
           {isRegister ? (
@@ -137,66 +161,66 @@ function Login() {
           )}
         </div>
       </div>
-      <div className="d-flex flex-column pe-md-5">
+      <div className="d-flex flex-column pe-md-4 form-container">
         <form onSubmit={isRegister ? handleRegisterSubmit : handleLoginSubmit}>
           {isRegister && (
             <div className="d-md-flex gap-2">
-                <div className="mb-3 form-floating d-flex flex-column">
+                <div className={`${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'}  d-flex flex-column`}>
                   <input
                     type="text"
                     name="firstName"
-                    className="form-inputs form-control"
+                    className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'}`} 
                     placeholder="First Name"
                     value={formData.firstName}
                     onChange={handleChange}
                     id="first-name"
                   />
-                  <label for="first-name">First Name</label>
+                  {!isMobile && <label htmlFor="first-name">First Name</label>}
                   {formErrors.firstName && <small className="text-danger mt-1">{formErrors.firstName}</small>}
                 </div>
-                <div className="mb-3 form-floating d-flex flex-column">
+                <div className={`${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'}  d-flex flex-column`}>
                   <input
                     type="text"
                     name="lastName"
-                    className="form-inputs form-control"
+                    className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'}`}
                     placeholder="Last Name"
                     value={formData.lastName}
                     onChange={handleChange}
                     id="last-name"
                   />
-                  <label for="last-name">Last Name</label>
+                  {!isMobile && <label htmlFor="last-name">Last Name</label>}
                   {formErrors.lastName && <small className="text-danger mt-1">{formErrors.lastName}</small>}
                 </div>
             </div>
           )}
 
-          <div className="mb-3 form-floating d-flex flex-column">
+          <div className={`${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'}  d-flex flex-column`}>
             <input
               type="email"
               name="email"
-              className="form-inputs form-control email-input"
+              className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'} email-input`}
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
               id="email"
             />
-            <label for="email">Email</label>
+           {!isMobile && <label htmlFor="email">Email</label>}
             {formErrors.email && <small className="text-danger mt-1">{formErrors.email}</small>}
           </div>
 
           <div className="d-md-flex gap-2">
-            <div className="mb-3 d-flex flex-column">
-              <div className="input-container form-floating">
+            <div className=" d-flex flex-column">
+              <div className={`input-container ${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'}`}>
                 <input
                   type={visiblePassword ? "text" : "password"}
                   name="password"
-                  className={`form-control form-inputs ${!isRegister ? 'login-password' : ''}`}
+                  className={`${!isMobile ? 'form-control' : 'mobile-inputs'} form-inputs ${!isRegister ? 'login-password' : ''}`}
                   placeholder="Password"
                   value={formData.password}
                   onChange={handleChange}
                   id="password"
                 />
-                <label for="password">Password</label>
+                {!isMobile && <label htmlFor="password">Password</label>}
                 <span onClick={() => setVisiblePassword(!visiblePassword)} className="password-toggle-icon">
                   {visiblePassword ? <LuEyeClosed /> : <BsEyeFill />} 
                 </span>
@@ -205,18 +229,18 @@ function Login() {
             </div>
 
             {isRegister && (
-              <div className="mb-3 d-flex flex-column">
-                <div className="input-container form-floating">
+              <div className=" d-flex flex-column">
+                <div className={`input-container ${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'}`}>
                   <input
                     type={visibleConfirmPassword ? "text" : "password"}
                     name="confirmPassword"
-                    className="form-inputs form-control"
+                    className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'}`}
                     placeholder="Confirm Password"
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     id="confirm-password"
                   />
-                  <label for="confirm-password">Confirm Password</label>
+                  {!isMobile && <label htmlFor="confirm-password">Confirm Password</label>}
                   <span
                     className="password-toggle-icon"
                     onClick={() => setVisibleConfirmPassword(!visibleConfirmPassword)}
@@ -234,12 +258,14 @@ function Login() {
             {isRegister ? "Register" : "Login"}
           </button>
         </form>
-        <div class="d-flex align-items-center my-3">
+        <div class="d-flex align-items-center divider">
           <hr class="flex-grow-1"/>
           <span class="mx-2">OR</span>
           <hr class="flex-grow-1"/>
         </div>
         <div className="text-center text-capitalize guest-mode" onClick={() => navigate('/home')}>continue as guest</div>
+      </div>
+      
       </div>
     </div>
   );
