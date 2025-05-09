@@ -167,6 +167,10 @@ video {
   position: relative;
   width: 100%;
 }
+.title-caption span{
+  cursor: pointer;
+  color: #0d6efd;
+}
 .form-inputs {
   border-radius: 5px;
   border: none;
@@ -213,7 +217,11 @@ input:focus{
   text-decoration: none;
   display: inline-block;
 }
+
 /* DARKMODE FOR LOGIN */
+.dark-mode .title-caption span{
+  color: black;
+}
 .dark-mode .password-toggle-icon{
   color: #1c1c1c;
 }
@@ -258,9 +266,9 @@ input:focus{
   transform: translateY(-50%);
   pointer-events: none;
 }
-/* input[type=text]{
+.search-input input[type=text]{
   padding-left: 50px;
-} */
+}
 input:focus{
   border: none !important;
   box-shadow: none !important;
@@ -285,6 +293,9 @@ input:focus{
 /* NAVBAR */
 .navbar{
   background-color: #f4f4f4;
+}
+.modal-backdrop {
+  z-index: 1;
 }
 /* DARKMODE FOR NAVBAR */
 .dark-mode .navbar {
@@ -324,7 +335,6 @@ input:focus{
 .dark-mode .custom-offcanvas .btn-close {
   filter: invert(1);
 }
-
 
 
 @media screen and (min-width: 320px) and (max-width: 426px){
@@ -446,5 +456,4 @@ input:focus{
   .title-box{
     font-size: 16px;
   }
-  
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from './navbar';
+import AuthModal from './AuthModal';
 
 function CountryDetails() {
   const { code } = useParams();
@@ -8,6 +9,7 @@ function CountryDetails() {
   const [country, setCountry] = useState(null);
   const [error, setError] = useState(null);
   const [isSaved, setIsSaved] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false); 
 
   useEffect(() => {
     const fetchCountryDetails = async () => {
@@ -34,7 +36,15 @@ function CountryDetails() {
   };
 
   const handleSaveCountry = () => {
+    const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+
+    if (!isAuthenticated) {
+      setShowAuthModal(true);
+      return;
+    }
+
     const saved = JSON.parse(localStorage.getItem("savedCountries")) || [];
+
     if (!isSaved) {
       saved.push(country);
       localStorage.setItem("savedCountries", JSON.stringify(saved));
@@ -46,20 +56,18 @@ function CountryDetails() {
   };
 
   if (error) return <div>Error: {error}</div>;
-  if (!country) {
-  return (
-    <div className="d-flex align-items-center justify-content-center vh-100">
-      <div className="text-center">
-        <div className="spinner-border text-primary mb-3" role="status">
-          <span className="visually-hidden">Loading...</span>
+    if (!country) {
+    return (
+      <div className="d-flex align-items-center justify-content-center vh-100">
+        <div className="text-center">
+          <div className="spinner-border text-primary mb-3" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <div>Loading...</div>
         </div>
-        <div>Loading...</div>
       </div>
-    </div>
-  );
-}
-
-
+    );
+  }
 
   return (
     <div>
@@ -113,6 +121,9 @@ function CountryDetails() {
                   >
                     {isSaved ? 'Saved ✅' : 'Save'}
                   </button>
+
+                  <AuthModal show={showAuthModal} onClose={() => setShowAuthModal(false)} />
+
 
                   <button className="btn btn-outline-secondary" onClick={() => navigate(-1)}>
                     ⬅ Back
