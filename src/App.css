@@ -258,9 +258,9 @@ input:focus{
   transform: translateY(-50%);
   pointer-events: none;
 }
-/* input[type=text]{
+.search-input input[type=text]{
   padding-left: 50px;
-} */
+}
 input:focus{
   border: none !important;
   box-shadow: none !important;
