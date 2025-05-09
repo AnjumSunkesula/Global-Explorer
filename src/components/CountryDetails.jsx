@@ -34,7 +34,16 @@ function CountryDetails() {
   };
 
   const handleSaveCountry = () => {
+    const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+
+    if (!isAuthenticated) {
+      alert("You need to login or register first to save countries.");
+      navigate("/login");
+      return;
+    }
+
     const saved = JSON.parse(localStorage.getItem("savedCountries")) || [];
+    
     if (!isSaved) {
       saved.push(country);
       localStorage.setItem("savedCountries", JSON.stringify(saved));
