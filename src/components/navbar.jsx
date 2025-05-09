@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import AuthModal from './AuthModal';
 
 function Navbar () {
 
   const navigate = useNavigate();
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const handleDeleteAccount = () => {
-
     const currentUserEmail = localStorage.getItem("currentUser");
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
@@ -47,8 +48,7 @@ function Navbar () {
                   onClick={() => {
                     const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
                     if (!isAuthenticated) {
-                      alert("You need to login or register first to view saved countries.");
-                      navigate("/login");
+                      setShowAuthModal(true);
                     } else {
                       navigate("/saved");
                     }
@@ -57,6 +57,7 @@ function Navbar () {
                   Saved Countries
                 </button>
               </li>
+              <AuthModal show={showAuthModal} onClose={() => setShowAuthModal(false)}/>
               <li className="nav-item">
                 <Link className="nav-link" to="/login">Login</Link>
               </li>
