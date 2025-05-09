@@ -11,7 +11,7 @@ function CountrySearch({ countries }) {
   return (
      <div className="search-container overflow-x-hidden">
       {/* Search Input */ }
-      <div className="mb-4 position-relative">
+      <div className="mb-4 position-relative search-input">
         <i className="bi bi-search position-absolute search-icon fs-4"></i>
         <input
           type="text"
