@@ -286,6 +286,9 @@ input:focus{
 .navbar{
   background-color: #f4f4f4;
 }
+.modal-backdrop {
+  z-index: 1;
+}
 /* DARKMODE FOR NAVBAR */
 .dark-mode .navbar {
   background-color: #1f1f1f !important;
@@ -324,7 +327,6 @@ input:focus{
 .dark-mode .custom-offcanvas .btn-close {
   filter: invert(1);
 }
-
 
 
 @media screen and (min-width: 320px) and (max-width: 426px){
@@ -446,5 +448,4 @@ input:focus{
   .title-box{
     font-size: 16px;
   }
-  
 }
