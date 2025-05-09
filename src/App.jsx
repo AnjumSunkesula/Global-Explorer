@@ -44,12 +44,8 @@ function App() {
           <Route exact path='/' Component={WelcomePage}/>
           <Route path='/login' Component={Login} />  
 
-          <Route path="/home" element={<Home />} />
-          <Route path="/country/:code" element={
-            <ProtectedRoute>
-              <CountryDetails />
-            </ProtectedRoute>
-          } />
+          <Route path="/home" Component={Home} />
+          <Route path="/country/:code" Component={CountryDetails} />
           <Route path="/saved" element={
             <ProtectedRoute>
               <SavedCountries />
