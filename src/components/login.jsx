@@ -80,25 +80,26 @@ function Login() {
 
     setFormErrors(errors);
     if (Object.keys(errors).length === 0) {
-    // check if user already exists
-    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const userExists = existingUsers.some(
-      (user) => user.email === formData.email
-    );
+      // check if user already exists
+      const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+      const userExists = existingUsers.some(
+        (user) => user.email === formData.email
+      );
 
-    if (userExists) {
-      alert("An account with this email already exists. Please login.");
-      return;
+      if (userExists) {
+        alert("An account with this email already exists. Please login.");
+        return;
+      }
+
+      // save new user
+      const updatedUsers = [...existingUsers, formData];
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+
+      alert("Registration successful!");
+      localStorage.setItem("isAuthenticated", "true"); // set auth status
+      localStorage.setItem("currentUser", formData.email);
+      navigate("/home");
     }
-
-    // save new user
-    const updatedUsers = [...existingUsers, formData];
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
-
-    alert("Registration successful!");
-    localStorage.setItem("isAuthenticated", "true"); // set auth status
-    navigate("/home");
-  }
   };
 
   const handleLoginSubmit = (e) => {
@@ -110,31 +111,28 @@ function Login() {
 
     setFormErrors(errors);
     if (Object.keys(errors).length === 0) {
-    const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+      const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-    const matchedUser = existingUsers.find(
-      (user) =>
-        user.email === formData.email && user.password === formData.password
-    );
+      const matchedUser = existingUsers.find((user) =>user.email === formData.email && user.password === formData.password);
 
-    if (!matchedUser) {
-      const userExists = existingUsers.some(
-        (user) => user.email === formData.email
-      );
+      if (!matchedUser) {
+        const userExists = existingUsers.some(
+          (user) => user.email === formData.email
+        );
 
-      if (userExists) {
-        alert("Incorrect password. Please try again.");
-      } else {
-        alert("No account found with this email. Please register first.");
-        setIsRegister(true);
+        if (userExists) {
+          alert("Incorrect password. Please try again.");
+        } else {
+          alert("No account found with this email. Please register first.");
+          setIsRegister(true);
+        }
+        return;
       }
-      return;
-    }
 
-    localStorage.setItem("isAuthenticated", "true");
-    localStorage.setItem("currentUser", formData.email);
-    navigate("/home");
-  }
+      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("currentUser", formData.email);
+      navigate("/home");
+    }
   };
 
   const isMobile = useIsMobile();
