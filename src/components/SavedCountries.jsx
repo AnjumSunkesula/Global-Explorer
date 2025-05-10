@@ -32,7 +32,7 @@ function SavedCountries() {
         ) : (
           <div className="row g-4">
             {savedCountries.map((country) => (
-              <div className="col-md-3" key={country.cca3}>
+              <div className="col-md-4" key={country.cca3}>
                 <div className="card h-100 shadow-sm">
                   <img
                     src={country.flags?.png || country.flags?.svg}
