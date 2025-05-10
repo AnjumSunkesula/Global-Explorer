@@ -7,10 +7,12 @@ function Navbar () {
   const navigate = useNavigate();
   const [showAuthModal, setShowAuthModal] = useState(false);
 
-  const handleDeleteAccount = () => {
-    const currentUserEmail = localStorage.getItem("currentUser");
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+  const currentUserEmail = localStorage.getItem("currentUser");
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+  
+  const isGuest = !currentUserEmail || !users.some(user => user.email === currentUserEmail);
 
+  const handleDeleteAccount = () => {
     const updatedUsers = users.filter(user => user.email !== currentUserEmail);
     localStorage.setItem("users", JSON.stringify(updatedUsers));
 
@@ -64,9 +66,10 @@ function Navbar () {
               <li className="nav-item">
                 <button 
                   type='button'
-                  className='nav-link'
+                  className={`nav-link ${isGuest ? "disabled" : ""}`}
                   data-bs-toggle='modal'
                   data-bs-target="#deleteAccountModalLabel"
+                  disabled={isGuest}
                 >
                   Delete Account
                 </button>
