@@ -238,6 +238,15 @@ input:focus{
 .dark-mode .form-floating label{
   color: white;
 }
+/* COUNTRY DETAILS */
+.card-container{
+  border-radius: 10px;
+  background-color: white;
+}
+.dark-mode .card-container{
+  border: 1px solid rgba(255, 255, 255, 0.481);
+  background-color: rgba(255, 255, 255, 0.14);
+}
 
 /* COUNTRY SEARCH */
 .search-container{
@@ -275,9 +284,6 @@ input:focus{
 }
 
 /* DARKMODE FOR HOME */
-.dark-mode .container {
-  background-color: transparent;
-}
 .dark-mode .card {
   background-color: rgba(255, 255, 255, 0.05);
   color: white;
