@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from './navbar';
 import AuthModal from './AuthModal';
+import { getUserSavedCountries, addCountryToSaved} from "../utils/storageUtils";
+
 
 function CountryDetails() {
   const { code } = useParams();
@@ -30,7 +32,7 @@ function CountryDetails() {
   }, [code]);
 
   const checkIfSaved = (country) => {
-    const saved = JSON.parse(localStorage.getItem("savedCountries")) || [];
+    const saved = getUserSavedCountries();
     const alreadySaved = saved.some((item) => item.cca3 === country.cca3);
     setIsSaved(alreadySaved);
   };
@@ -43,11 +45,8 @@ function CountryDetails() {
       return;
     }
 
-    const saved = JSON.parse(localStorage.getItem("savedCountries")) || [];
-
     if (!isSaved) {
-      saved.push(country);
-      localStorage.setItem("savedCountries", JSON.stringify(saved));
+      addCountryToSaved(country);
       setIsSaved(true);
       alert(`${country.name.common} saved!`);
     } else {
@@ -60,10 +59,8 @@ function CountryDetails() {
     return (
       <div className="d-flex align-items-center justify-content-center vh-100">
         <div className="text-center">
-          <div className="spinner-border text-primary mb-3" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-          <div>Loading...</div>
+          <div className="spinner-border text-primary mb-3" role="status"></div>
+          <div>Loading...Please wait</div>
         </div>
       </div>
     );
@@ -72,7 +69,7 @@ function CountryDetails() {
   return (
     <div>
       <Navbar/>
-      <div className="card shadow-lg container" style={{ marginTop: '75px'}}>
+      <div className="shadow-lg container card" style={{ marginTop: '75px'}}>
         <div className="row g-0 ">
           {/* Flag */}
           <div className="col-md-4 text-center p-4">
@@ -89,48 +86,45 @@ function CountryDetails() {
             <div className="card-body">
               <h2 className="mb-3">{country.name.common}</h2>
               <p><strong>Capital:</strong> {country.capital || "N/A"}</p>
+              <p>
+                <strong>Nationality:</strong>{" "}
+                {country.demonyms?.eng ? `${country.demonyms.eng.m} / ${country.demonyms.eng.f}` : "N/A"}
+              </p>
               <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
               <p>
                 <strong>Languages:</strong>{" "}
                 {Object.values(country.languages || {}).join(", ") || "N/A"}
               </p>
-
-               <p>
+              <p>
                 <strong>Currencies:</strong>{" "}
-                {country.currencies
-                  ? Object.entries(country.currencies)
-                      .map(([code, { name, symbol }]) => `${name} (${symbol || code})`)
-                      .join(", ")
-                  : "N/A"}
+                {country.currencies? Object.entries(country.currencies).map(([code, { name, symbol }]) => `${name} (${symbol || code})`).join(", "): "N/A"}
               </p>
               <p><strong>Region:</strong> {country.region}</p>
               <p><strong>Subregion:</strong> {country.subregion || "N/A"}</p>
-
-               <p>
-                  <strong>Borders:</strong>{" "}
-                  {country.borders && country.borders.length > 0
-                    ? country.borders.join(", ")
-                    : "None"}
-                </p>
-
-                <div className="d-flex align-items-center gap-3 mt-4">
-                  <button
-                    onClick={handleSaveCountry}
-                    disabled={isSaved}
-                    className={`btn px-4 btn-${isSaved ? 'success' : 'primary'}`}
-                  >
-                    {isSaved ? 'Saved ✅' : 'Save'}
-                  </button>
-
-                  <AuthModal show={showAuthModal} onClose={() => setShowAuthModal(false)} />
-
-
-                  <button className="btn btn-outline-secondary" onClick={() => navigate(-1)}>
-                    ⬅ Back
-                  </button>
-                </div>
-
-
+              <p>
+                <strong>Borders:</strong>{" "}
+                {country.borders && country.borders.length > 0? country.borders.join(", "): "None"}
+              </p>
+              <p>
+                <strong>Coordinates:</strong>{" "}
+                {country.latlng ? `${country.latlng[0]}, ${country.latlng[1]}` : "N/A"}
+              </p>
+              <p><strong>ISO Codes:</strong> {country.cca2} / {country.cca3} / {country.ccn3}</p>
+              <p><strong>UN Member:</strong> {country.unMember ? "Yes" : "No"}</p>
+              <p><strong>Independent:</strong> {country.independent ? "Yes" : "No"}</p>
+              <div className="d-flex align-items-center gap-3 mt-3">
+                <button
+                  onClick={handleSaveCountry}
+                  disabled={isSaved}
+                  className={`btn px-4 btn-${isSaved ? 'success' : 'primary'}`}
+                >
+                  {isSaved ? 'Saved ✅' : 'Save'}
+                </button>
+                <AuthModal show={showAuthModal} onClose={() => setShowAuthModal(false)} />
+                <button className="btn btn-outline-secondary" onClick={() => navigate(-1)}>
+                  ⬅ Back
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -138,5 +132,4 @@ function CountryDetails() {
     </div>
   );
 }
-
 export default CountryDetails;

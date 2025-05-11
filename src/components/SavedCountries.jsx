@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './navbar';
+import { getUserSavedCountries, removeCountryFromSaved } from "../utils/storageUtils";
+
 
 
 function SavedCountries() {
-  const [savedCountries, setSavedCountries] = useState(
-    JSON.parse(localStorage.getItem('savedCountries')) || []
-  );
+  const [savedCountries, setSavedCountries] = useState([]);
 
   useEffect(() => {
-  const saved = JSON.parse(localStorage.getItem("savedCountries")) || [];
-  setSavedCountries(saved);
-}, []);
+    const saved = getUserSavedCountries();
+    setSavedCountries(saved);
+  }, []);
+
 
 
   const removeCountry = (countryCode) => {
-    const updatedCountries = savedCountries.filter(
-      (country) => country.cca3 !== countryCode
-    );
-    setSavedCountries(updatedCountries);
-    localStorage.setItem('savedCountries', JSON.stringify(updatedCountries));
+    removeCountryFromSaved(countryCode);
+    const updated = getUserSavedCountries();
+    setSavedCountries(updated);
   };
+
 
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -32,7 +32,7 @@ function SavedCountries() {
         ) : (
           <div className="row g-4">
             {savedCountries.map((country) => (
-              <div className="col-md-3" key={country.cca3}>
+              <div className="col-md-6 col-lg-4 countries-col" key={country.cca3}>
                 <div className="card h-100 shadow-sm">
                   <img
                     src={country.flags?.png || country.flags?.svg}
