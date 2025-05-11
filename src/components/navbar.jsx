@@ -13,15 +13,27 @@ function Navbar () {
   const isGuest = !currentUserEmail || !users.some(user => user.email === currentUserEmail);
 
   const handleDeleteAccount = () => {
+    // Remove saved countries for current user
+    const allSaved = JSON.parse(localStorage.getItem("userSavedCountries")) || {};
+    
+    if (allSaved[currentUserEmail]) {
+      delete allSaved[currentUserEmail]; // remove user-specific entry
+      localStorage.setItem("userSavedCountries", JSON.stringify(allSaved));
+      console.log("Deleted saved countries for:", currentUserEmail);
+    }
+
+    // Remove user from users list
     const updatedUsers = users.filter(user => user.email !== currentUserEmail);
     localStorage.setItem("users", JSON.stringify(updatedUsers));
 
+    localStorage.removeItem(`savedCountries_${currentUserEmail}`);
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("currentUser");
 
     alert("Your account has been deleted. You will need to register again to log in.");
     navigate("/login");
   };
+
 
   return (
     <nav className="navbar navbar-expand-lg fixed-top">
