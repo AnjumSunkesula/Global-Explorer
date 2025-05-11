@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from './navbar';
 import AuthModal from './AuthModal';
+import { getUserSavedCountries, addCountryToSaved} from "../utils/storageUtils";
+
 
 function CountryDetails() {
   const { code } = useParams();
@@ -30,7 +32,7 @@ function CountryDetails() {
   }, [code]);
 
   const checkIfSaved = (country) => {
-    const saved = JSON.parse(localStorage.getItem("savedCountries")) || [];
+    const saved = getUserSavedCountries();
     const alreadySaved = saved.some((item) => item.cca3 === country.cca3);
     setIsSaved(alreadySaved);
   };
@@ -43,11 +45,8 @@ function CountryDetails() {
       return;
     }
 
-    const saved = JSON.parse(localStorage.getItem("savedCountries")) || [];
-
     if (!isSaved) {
-      saved.push(country);
-      localStorage.setItem("savedCountries", JSON.stringify(saved));
+      addCountryToSaved(country);
       setIsSaved(true);
       alert(`${country.name.common} saved!`);
     } else {
