@@ -69,7 +69,7 @@ function CountryDetails() {
   return (
     <div>
       <Navbar/>
-      <div className="shadow-lg container card-container" style={{ marginTop: '75px'}}>
+      <div className="shadow-lg container card" style={{ marginTop: '75px'}}>
         <div className="row g-0 ">
           {/* Flag */}
           <div className="col-md-4 text-center p-4">
@@ -82,7 +82,7 @@ function CountryDetails() {
           </div>
 
           {/* Info */}
-          <div className="col-md-8 py-3">
+          <div className="col-md-8">
             <div className="card-body">
               <h2 className="mb-3">{country.name.common}</h2>
               <p><strong>Capital:</strong> {country.capital || "N/A"}</p>
