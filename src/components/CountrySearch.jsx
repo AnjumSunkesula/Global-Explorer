@@ -31,7 +31,7 @@ function CountrySearch({ countries }) {
           filteredCountries.map((country) => (
             <div
               key={country.cca3}
-              className="col-sm-6 col-md-4 col-lg-3 mb-3"
+              className="col-md-6 col-lg-4 countries-col mb-3"
             >
               <div className="card h-100">
                 <img
