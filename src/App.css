@@ -467,4 +467,9 @@ input:focus{
   .title-box{
     font-size: 16px;
   }
+  /* saved countires */
+  .countries-col{
+    flex: 0 0 auto;
+    width: 25%;
+  }
 }
