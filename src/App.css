@@ -239,15 +239,6 @@ input:focus{
 .dark-mode .form-floating label{
   color: white;
 }
-/* COUNTRY DETAILS */
-.card-container{
-  border-radius: 10px;
-  background-color: white;
-}
-.dark-mode .card-container{
-  border: 1px solid rgba(255, 255, 255, 0.481);
-  background-color: rgba(255, 255, 255, 0.14);
-}
 
 /* COUNTRY SEARCH */
 .search-container{
@@ -264,11 +255,7 @@ input:focus{
 .card {
   border-radius: 10px;
   overflow: hidden;
-}
-.card:hover {
-  transform: scale(1.05);
   box-shadow: 0 8px 15px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
 }
 .search-icon{
   top: 50%;
