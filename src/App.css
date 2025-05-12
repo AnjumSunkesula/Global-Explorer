@@ -160,19 +160,35 @@ video {
   cursor: pointer;
   color: #0d6efd;
 }
+input:focus{
+  outline: none;
+  box-shadow: none !important;
+}
 .form-inputs {
   border-radius: 5px;
   border: none;
 }
+.form-inputs.border-danger{
+  border-color: #dc3545;
+}
+.form-inputs.border-success {
+  border-color: #28a745;
+}
+/* to override form-floating padding */
+.form-floating > label{
+  padding: 1rem 0;
+  padding-left: 35px;
+}
+input.form-control {
+  padding-left: 35px !important;
+}
 .password-toggle-icon {
   position: absolute;
   top: 50%;
-  right: 10px;
+  left: 10px;
   transform: translateY(-50%);
   font-size: 1.2rem;
-}
-input:focus{
-  outline: none;
+  cursor: none;
 }
 .login-container{
   background-image: url(/bg.jpg);
@@ -251,12 +267,9 @@ input:focus{
   transform: translateY(-50%);
   pointer-events: none;
 }
-.search-input input[type=text]{
-  padding-left: 50px;
-}
-input:focus{
-  border: none !important;
-  box-shadow: none !important;
+.search-input input.form-control[type="text"] {
+  padding-left: 50px !important;
+  border: none;
 }
 
 /* DARKMODE FOR HOME */
