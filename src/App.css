@@ -171,24 +171,38 @@ input:focus{
 .form-inputs.border-danger{
   border-color: #dc3545;
 }
+.icon-x{
+  top: 34%;
+}
+.icon-x-password{
+  top: 23%;
+}
 .form-inputs.border-success {
   border-color: #28a745;
 }
-/* to override form-floating padding */
-.form-floating > label{
-  padding: 1rem 0;
-  padding-left: 35px;
-}
-input.form-control {
-  padding-left: 35px !important;
-}
-.password-toggle-icon {
+.icon-wrapper {
   position: absolute;
-  top: 50%;
-  left: 10px;
+  top: 40%;
+  right: 12px;
   transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.icon-wrapper.error{
+  top: 25%;
+}
+.icon-wrapper.valid{
+  top: 55%;
+}
+.password-toggle-icon,
+.validation-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
   font-size: 1.2rem;
-  cursor: none;
+  pointer-events: auto;
 }
 .login-container{
   background-image: url(/bg.jpg);
@@ -223,7 +237,6 @@ input.form-control {
   text-decoration: none;
   display: inline-block;
 }
-
 /* DARKMODE FOR LOGIN */
 .dark-mode .title-caption span{
   color: black;
