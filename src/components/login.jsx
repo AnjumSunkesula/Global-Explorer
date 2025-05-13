@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LuEyeClosed } from "react-icons/lu";
 import { BsEyeFill } from "react-icons/bs";
-
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai"; 
 
 
 
@@ -39,10 +39,50 @@ function Login() {
   const [visiblePassword, setVisiblePassword] = useState(false);
   const [visibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
 
+  const validateField = (name, value, allValues = {}) => {
+    let error = "";
+  
+    if (name === "firstName" || name === "lastName") {
+      if (!value.trim()) {
+        error = `${name === "firstName" ? "First" : "Last"} name required`;
+      }
+    }
+    if (name === "email") {
+      if (!value.trim()) {
+        error = "Email is required";
+      } else if (!/\S+@\S+\.\S+/.test(value)) {
+        error = "Invalid email";
+      }
+    }
+    if (name === "password") {
+      if (!value) {
+        error = "Password is required";
+      } else if (!isValidPassword(value)) {
+        error = "Password must be 8+ characters, symbol, number, upper & lower case";
+      }
+    }
+    if (name === "confirmPassword") {
+      if (value !== allValues.password) {
+        error = "Passwords must match";
+      }
+    }
+    return error;
+  };
+  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  
+    // Update formData state
+    setFormData((prev) => {
+      const updatedForm = { ...prev, [name]: value };
+      const error = validateField(name, value, updatedForm);
+      setFormErrors((errors) => ({ ...errors, [name]: error }));
+      return updatedForm;
+    });
   };
+  
+  
 
   const isValidPassword = (password) => {
     const symbolRegex = /[!@#$%^&*(),.?":{}|<>]/;
@@ -62,23 +102,13 @@ function Login() {
     e.preventDefault();
     const errors = {};
 
-    if (!formData.firstName.trim()) errors.firstName = "First name required";
-    if (!formData.lastName.trim()) errors.lastName = "Last name required";
-    if (!formData.email.trim()) {
-      errors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = "Invalid email";
-    }
-    if (!formData.password) {
-      errors.password = "Password is required";
-    } else if (!isValidPassword(formData.password)) {
-      errors.password = "Password must be 8+ characters with symbol, number, uppercase and lowercase.";
-    }
-    if (formData.confirmPassword !== formData.password) {
-      errors.confirmPassword = "Passwords must match";
+    for (const field of ["firstName", "lastName", "email", "password", "confirmPassword"]) {
+      const error = validateField(field, formData[field], formData);
+      if (error) errors[field] = error;
     }
 
     setFormErrors(errors);
+
     if (Object.keys(errors).length === 0) {
       // check if user already exists
       const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
@@ -106,9 +136,10 @@ function Login() {
     e.preventDefault();
     const errors = {};
 
-    if (!formData.email.trim()) errors.email = "Email is required";
-    if (!formData.password.trim()) errors.password = "Password is required";
-
+    for (const field of ["email", "password"]) {
+      const error = validateField(field, formData[field], formData);
+      if (error) errors[field] = error;
+    }
     setFormErrors(errors);
     if (Object.keys(errors).length === 0) {
       const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
@@ -167,90 +198,132 @@ function Login() {
                     <input
                       type="text"
                       name="firstName"
-                      className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'}`} 
+                      className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'} ${formData.firstName ? formErrors.firstName ? 'border border-danger': 'border border-success': ''}`} 
                       placeholder="First Name"
                       value={formData.firstName}
                       onChange={handleChange}
                       id="first-name"
                     />
+                    
                     {!isMobile && <label htmlFor="first-name">First Name</label>}
-                    {formErrors.firstName && <small className="text-danger mt-1">{formErrors.firstName}</small>}
+
+                    {formData.firstName && (
+                      <span className='position-absolute fs-5 end-0 top-50 translate-middle-y pe-3'>
+                        {formErrors.firstName ? (
+                          <AiOutlineClose className="text-danger" />
+                        ) : (
+                          <AiOutlineCheck className="text-success" />
+                        )}
+                      </span>
+                    )}
                   </div>
                   <div className={`${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'}  d-flex flex-column`}>
                     <input
                       type="text"
                       name="lastName"
-                      className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'}`}
+                      className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'} ${formData.lastName ? formErrors.lastName ? 'border border-danger': 'border border-success': ''}`}
                       placeholder="Last Name"
                       value={formData.lastName}
                       onChange={handleChange}
                       id="last-name"
                     />
+
                     {!isMobile && <label htmlFor="last-name">Last Name</label>}
-                    {formErrors.lastName && <small className="text-danger mt-1">{formErrors.lastName}</small>}
+
+                    {formData.lastName && (
+                      <span className='position-absolute fs-5 end-0 top-50 translate-middle-y pe-3'>
+                        {formErrors.lastName ? (
+                          <AiOutlineClose className="text-danger" />
+                        ) : (
+                          <AiOutlineCheck className="text-success" />
+                        )}
+                      </span>
+                    )}
                   </div>
               </div>
             )}
 
-            <div className={`${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'}  d-flex flex-column`}>
+            <div className={`${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'} d-flex flex-column position-relative`}>
               <input
                 type="email"
                 name="email"
-                className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'} email-input`}
+                className={`form-inputs email-input ${!isMobile ? 'form-control' : 'mobile-inputs'} ${formData.email ? formErrors.email ? 'border border-danger': 'border border-success': ''}`}
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
                 id="email"
               />
-            {!isMobile && <label htmlFor="email">Email</label>}
+
+              {!isMobile && <label htmlFor="email">Email</label>}
+
+              {formData.email && (
+                <span className={`position-absolute fs-5 end-0 translate-middle-y pe-3 ${formErrors.email ? 'icon-x' : 'top-50'}`}>
+                  {formErrors.email ? (
+                    <AiOutlineClose className="text-danger" />
+                  ) : (
+                    <AiOutlineCheck className="text-success" />
+                  )}
+                </span>
+              )}
+
               {formErrors.email && <small className="text-danger mt-1">{formErrors.email}</small>}
             </div>
 
-            <div className="d-md-flex gap-2">
-              <div className=" d-flex flex-column">
-                <div className={`input-container ${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'}`}>
-                  <input
-                    type={visiblePassword ? "text" : "password"}
-                    name="password"
-                    className={`${!isMobile ? 'form-control' : 'mobile-inputs'} form-inputs ${!isRegister ? 'login-password' : ''}`}
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    id="password"
-                  />
-                  {!isMobile && <label htmlFor="password">Password</label>}
-                  <span onClick={() => setVisiblePassword(!visiblePassword)} className="password-toggle-icon">
-                    {visiblePassword ? <LuEyeClosed /> : <BsEyeFill />} 
+
+            <div className="d-md-flex gap-2" >
+              <div className={`${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'} d-flex flex-column position-relative`} style={{ width: 'min-content'}}>
+                <input
+                  type={visiblePassword ? "text" : "password"}
+                  name="password"
+                  className={`form-inputs position-relative ${!isMobile ? 'form-control' : 'mobile-inputs'}  ${!isRegister ? 'login-password' : ''} ${formErrors.password ? 'border border-danger' : formData.password ? 'border border-success' : ''}`}
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  id="password"
+                />
+                {!isMobile && <label htmlFor="password">Password</label>}
+                <div className={`icon-wrapper ${formErrors.password ? 'error' : 'valid'}`}>
+                  {formData.password && (
+                    <span className={`validation-icon ${formErrors.password ? 'text-danger' : 'text-success'}`}>
+                      {formErrors.password ? <AiOutlineClose /> : <AiOutlineCheck />}
+                    </span>
+                  )}
+                  <span className="password-toggle-icon" onClick={() => setVisiblePassword(!visiblePassword)}>
+                    {visiblePassword ? <LuEyeClosed /> : <BsEyeFill />}
                   </span>
                 </div>
-                {formErrors.password && <div className="text-danger mt-1">{formErrors.password}</div>}
+
+
+                {formErrors.password && <small className="text-danger mt-1" style={{width: '100%'}}>{formErrors.password}</small>}
               </div>
 
               {isRegister && (
-                <div className=" d-flex flex-column">
-                  <div className={`input-container ${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'}`}>
-                    <input
-                      type={visibleConfirmPassword ? "text" : "password"}
-                      name="confirmPassword"
-                      className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'}`}
-                      placeholder="Confirm Password"
-                      value={formData.confirmPassword}
-                      onChange={handleChange}
-                      id="confirm-password"
-                    />
-                    {!isMobile && <label htmlFor="confirm-password">Confirm Password</label>}
-                    <span
-                      className="password-toggle-icon"
-                      onClick={() => setVisibleConfirmPassword(!visibleConfirmPassword)}
-                    >
+                <div className={`${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'} d-flex flex-column position-relative`}>
+                  <input
+                    type={visibleConfirmPassword ? "text" : "password"}
+                    name="confirmPassword"
+                    className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'} ${formErrors.confirmPassword ? 'border border-danger' : formData.confirmPassword ? 'border border-success' : ''}`}
+                    placeholder="Confirm Password"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    id="confirm-password"
+                  />
+                  {!isMobile && <label htmlFor="confirm-password">Confirm Password</label>}
+                  <div className={`icon-wrapper ${formErrors.password ? 'error' : 'valid'}`}>
+                    {formData.confirmPassword && (
+                      <span className={`validation-icon ${formErrors.confirmPassword ? 'text-danger' : 'text-success'}`}>
+                        {formErrors.confirmPassword ? <AiOutlineClose /> : <AiOutlineCheck />}
+                      </span>
+                    )}
+                    <span className="password-toggle-icon" onClick={() => setVisibleConfirmPassword(!visibleConfirmPassword)}>
                       {visibleConfirmPassword ? <LuEyeClosed /> : <BsEyeFill />}
                     </span>
-                  </div>
-                  {formErrors.confirmPassword && <div className="text-danger mt-1">{formErrors.confirmPassword}</div>}
+                </div>
+
+                  {formErrors.confirmPassword && <small className="text-danger mt-1">{formErrors.confirmPassword}</small>}
                 </div>
               )}
             </div>
-
 
             <button type="submit" className="btn-custom text-center w-100">
               {isRegister ? "Register" : "Login"}
