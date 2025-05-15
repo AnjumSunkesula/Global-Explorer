@@ -194,11 +194,11 @@ function Login() {
           <form onSubmit={isRegister ? handleRegisterSubmit : handleLoginSubmit}>
             {isRegister && (
               <div className="d-md-flex gap-2">
-                  <div className={`${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'}  d-flex flex-column`}>
+                  <div className={`${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'}  d-flex flex-column position-relative`}>
                     <input
                       type="text"
                       name="firstName"
-                      className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'} ${formData.firstName ? formErrors.firstName ? 'border border-danger': 'border border-success': ''}`} 
+                      className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'} ${formErrors.firstName ? 'border border-danger' : formData.firstName ? 'border border-success' : ''}`} 
                       placeholder="First Name"
                       value={formData.firstName}
                       onChange={handleChange}
@@ -207,21 +207,28 @@ function Login() {
                     
                     {!isMobile && <label htmlFor="first-name">First Name</label>}
 
-                    {formData.firstName && (
-                      <span className='position-absolute fs-5 end-0 top-50 translate-middle-y pe-3'>
-                        {formErrors.firstName ? (
-                          <AiOutlineClose className="text-danger" />
-                        ) : (
-                          <AiOutlineCheck className="text-success" />
-                        )}
+                    {formErrors.firstName || formData.firstName ?  (
+                      <span
+                        className={`position-absolute fs-5 end-0 translate-middle-y pe-3 top-50 ${
+                          formErrors.firstName
+                          ? `text-danger ${isMobile ? 'icon-x-mobile' : 'icon-x'}`
+                          : `text-success ${isMobile ? 'icon-check-mobile' : ''}`
+                        }`}
+                      >
+                        {formErrors.firstName ? <AiOutlineClose /> : <AiOutlineCheck />}
                       </span>
+                    ): null}
+
+                    {formErrors.firstName && (
+                      <small className="text-danger mt-1">{formErrors.firstName}</small>
                     )}
                   </div>
-                  <div className={`${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'}  d-flex flex-column`}>
+
+                  <div className={`${!isMobile ? 'mb-3 form-floating' : 'input-wrapper'}  d-flex flex-column position-relative`}>
                     <input
                       type="text"
                       name="lastName"
-                      className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'} ${formData.lastName ? formErrors.lastName ? 'border border-danger': 'border border-success': ''}`}
+                      className={`form-inputs ${!isMobile ? 'form-control' : 'mobile-inputs'} ${formErrors.lastName ? 'border border-danger' : formData.lastName ? 'border border-success' : ''}`}
                       placeholder="Last Name"
                       value={formData.lastName}
                       onChange={handleChange}
@@ -230,14 +237,20 @@ function Login() {
 
                     {!isMobile && <label htmlFor="last-name">Last Name</label>}
 
-                    {formData.lastName && (
-                      <span className='position-absolute fs-5 end-0 top-50 translate-middle-y pe-3'>
-                        {formErrors.lastName ? (
-                          <AiOutlineClose className="text-danger" />
-                        ) : (
-                          <AiOutlineCheck className="text-success" />
-                        )}
+                    {formErrors.lastName || formData.lastName ? (
+                      <span
+                        className={`position-absolute fs-5 end-0 translate-middle-y pe-3 top-50 ${
+                          formErrors.lastName
+                          ? `text-danger ${isMobile ? 'icon-x-mobile' : 'icon-x'}`
+                          : `text-success ${isMobile ? 'icon-check-mobile' : ''}`
+                        }`}
+                      >
+                        {formErrors.lastName ? <AiOutlineClose /> : <AiOutlineCheck />}
                       </span>
+                    ) : null}
+
+                    {formErrors.lastName && (
+                      <small className="text-danger mt-1">{formErrors.lastName}</small>
                     )}
                   </div>
               </div>
@@ -247,7 +260,7 @@ function Login() {
               <input
                 type="email"
                 name="email"
-                className={`form-inputs email-input ${!isMobile ? 'form-control' : 'mobile-inputs'} ${formData.email ? formErrors.email ? 'border border-danger': 'border border-success': ''}`}
+                className={`form-inputs email-input ${!isMobile ? 'form-control' : 'mobile-inputs'} ${formErrors.email ? 'border border-danger' : formData.email ? 'border border-success' : ''}`}
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
