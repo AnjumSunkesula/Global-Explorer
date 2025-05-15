@@ -174,8 +174,12 @@ input:focus{
 .icon-x{
   top: 34%;
 }
-.icon-x-password{
-  top: 23%;
+.icon-x-mobile{
+  top: 29% !important;
+  padding-right: 8px !important;
+}
+.icon-check-mobile{
+  padding-right: 8px !important;
 }
 .form-inputs.border-success {
   border-color: #28a745;
@@ -192,6 +196,7 @@ input:focus{
 .icon-wrapper.error{
   top: 25%;
 }
+
 .icon-wrapper.valid{
   top: 55%;
 }
