@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function CountrySearch({ countries }) {
@@ -9,7 +9,7 @@ function CountrySearch({ countries }) {
   );
 
   return (
-     <div className="search-container overflow-x-hidden">
+     <div className="search-container">
       {/* Search Input */ }
       <div className="mb-4 position-relative search-input">
         <i className="bi bi-search position-absolute search-icon fs-4"></i>
