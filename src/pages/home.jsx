@@ -29,7 +29,7 @@ function Home() {
       </section>
 
       {/* Search Section */}
-       <main className="flex-fill py-4">
+       <main className="flex-fill py-4" style={{ marginBottom: '72px' }}>
         <div className="container">
           <h2 className="text-center mb-4">Search Countries</h2>
           <CountrySearch countries={countries} />
@@ -47,5 +47,4 @@ function Home() {
     </div>
   );
 }
-
 export default Home;
