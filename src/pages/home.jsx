@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CountrySearch from "../components/CountrySearch";
 import Navbar from "../components/navbar";
 
@@ -7,7 +7,7 @@ function Home() {
 
   useEffect(() => {
     const fetchCountries = async () => {
-      const response = await fetch("https://restcountries.com/v3.1/all");
+      const response = await fetch(`https://restcountries.com/v3.1/all?fields=name,cca3,flags,capital,region`);
       const data = await response.json();
       setCountries(data);
     };
@@ -29,7 +29,7 @@ function Home() {
       </section>
 
       {/* Search Section */}
-       <main className="flex-fill py-4">
+       <main className="flex-fill py-4" style={{ marginBottom: '72px' }}>
         <div className="container">
           <h2 className="text-center mb-4">Search Countries</h2>
           <CountrySearch countries={countries} />
@@ -47,5 +47,4 @@ function Home() {
     </div>
   );
 }
-
 export default Home;
