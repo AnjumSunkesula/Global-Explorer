@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthModal from './AuthModal';
+import Toggle from './Theme-toggle';
 
 function Navbar () {
 
@@ -38,7 +39,10 @@ function Navbar () {
   return (
     <nav className="navbar navbar-expand-lg fixed-top">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">Global Explorer</Link>
+        <div className='navbar-toggle d-flex align-items-center gap-2'>
+          <Link className="navbar-brand me-0" to="/">Global Explorer</Link>
+          <Toggle />
+        </div>
 
         {/* Offcanvas Toggle Button */}
         <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
