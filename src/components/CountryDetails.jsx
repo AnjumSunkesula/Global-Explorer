@@ -69,7 +69,7 @@ function CountryDetails() {
   return (
     <div>
       <Navbar/>
-      <div className="shadow-lg container card" style={{ marginTop: '75px'}}>
+      <div className="shadow-lg container card" style={{ marginTop: '40px'}}>
         <div className="row g-0 ">
           {/* Flag */}
           <div className="col-md-4 text-center p-4">
