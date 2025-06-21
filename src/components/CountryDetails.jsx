@@ -21,8 +21,8 @@ function CountryDetails() {
           throw new Error("Country not found");
         }
         const data = await response.json();
-        setCountry(data[0]);
-        checkIfSaved(data[0]);
+        setCountry(data);
+        checkIfSaved(data);
       } catch (error) {
         setError(error.message);
       }
