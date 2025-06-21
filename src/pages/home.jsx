@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CountrySearch from "../components/CountrySearch";
 import Navbar from "../components/navbar";
 
@@ -7,7 +7,7 @@ function Home() {
 
   useEffect(() => {
     const fetchCountries = async () => {
-      const response = await fetch("https://restcountries.com/v3.1/all");
+      const response = await fetch(`https://restcountries.com/v3.1/all?fields=name,cca3,flags,capital,region`);
       const data = await response.json();
       setCountries(data);
     };

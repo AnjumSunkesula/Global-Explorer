@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from './navbar';
 import AuthModal from './AuthModal';
@@ -16,7 +16,7 @@ function CountryDetails() {
   useEffect(() => {
     const fetchCountryDetails = async () => {
       try {
-        const response = await fetch(`https://restcountries.com/v3.1/alpha/${code}`);
+        const response = await fetch(`https://restcountries.com/v3.1/alpha/${code}?fields=name,capital,flags,population,languages,currencies,region,subregion,borders,latlng,cca2,cca3,ccn3,unMember,independent,demonyms`);
         if (!response.ok) {
           throw new Error("Country not found");
         }
