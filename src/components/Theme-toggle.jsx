@@ -5,13 +5,24 @@ import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 function Toggle() {
 
   const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const savedMode = JSON.parse(localStorage.getItem("darkMode"));
+    if (savedMode !== null) {
+      setDarkMode(savedMode);
+    }
+  }, []);
   
   useEffect(() => {
     document.documentElement.classList.toggle('dark-mode', darkMode);
   }, [darkMode]);
 
   const toggleTheme = () => {
-    setDarkMode(prev => !prev);
+    setDarkMode(prev => {
+      const newMode = !prev;
+      localStorage.setItem("darkMode", JSON.stringify(newMode));
+      return newMode;
+    });
   };
 
   return(
