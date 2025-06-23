@@ -2,10 +2,11 @@
 
 /* THEME TOGGLE SWITCH */
 .theme-toggle-wrapper {
-  /* position: fixed;
-  top: 70px;
+  position: fixed;
+  top: 0;
   right: 20px;
-  z-index: 100; */
+  z-index: 100;
+  margin-top: 14px;
 }
 /* Outer switch container */
 .switch {
@@ -118,9 +119,6 @@ html {
   padding-left: 3em;
   color: white;
 }
-.dark-mode .text{
-  color: #1c1c1c;
-}
 .title{
   font-size: 1.5em;
 }
@@ -196,7 +194,6 @@ input:focus{
 .icon-wrapper.error{
   top: 25%;
 }
-
 .icon-wrapper.valid{
   top: 55%;
 }
@@ -231,16 +228,15 @@ input:focus{
   margin: 1rem 0;
 }
 .guest-mode{
-  padding: 10px 15px;
-  color: rgb(69, 57, 243);
+  color: #0d6efd;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.dark-mode .guest-mode{
+  color: black;
 }
 .guest-mode:hover{
-  cursor: pointer;
-  background-color: var(--buttonBackgroundColor);
-  color: var(--buttonTextColor);
-  border-radius: 8px;
-  text-decoration: none;
-  display: inline-block;
+  transform: translateY(-3px);
 }
 /* DARKMODE FOR LOGIN */
 .dark-mode .title-caption span{

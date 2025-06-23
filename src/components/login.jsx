@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { LuEyeClosed } from "react-icons/lu";
 import { BsEyeFill } from "react-icons/bs";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai"; 
-
+import Toggle from './Theme-toggle';
 
 
 
@@ -173,6 +173,9 @@ function Login() {
 
   return (
     <div className="vh-100 d-flex justify-content-center align-items-center login-container">
+      <div className='theme-toggle-wrapper'>
+        <Toggle/>
+      </div>
       <div className="login-box">
         <div className="d-flex flex-column mb-3 ps-md-4 title-box">
           <div className="title text-uppercase">{isRegister ? "Create your own account" : "Welcome back! Log in to continue."}</div>
