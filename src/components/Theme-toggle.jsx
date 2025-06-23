@@ -26,7 +26,7 @@ function Toggle() {
   };
 
   return(
-    <div className="theme-toggle-wrapper">
+    <div>
       <label className="switch">
         <input 
           type="checkbox" 
